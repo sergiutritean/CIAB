@@ -1,3 +1,5 @@
+import 'materialize-css';
+import { MaterializeModule } from 'angular2-materialize';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -21,6 +23,24 @@ import { AllOffersComponent } from './services/all-offers/all-offers.component';
 import { OfferComponent } from './services/all-offers/offer/offer.component';
 import { ServiceDetailsComponent } from './service/service-details/service-details.component';
 import { SupportComponent } from './support/support.component';
+import { FooterComponent } from './footer/footer.component';
+
+import { StarRatingModule } from 'angular-star-rating';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: '', component: HomePageComponent},
+  { path: 'add_service', component: AddServiceComponent},
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'feedback', component: FeedbackComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'profile', component: ProfileComponent},
+  { path: 'services', component: ServicesComponent, children: [
+    { path: ':id', component: ServiceComponent},
+  ]},
+  { path: 'support', component: SupportComponent},
+];
 
 @NgModule({
   declarations: [
@@ -43,10 +63,14 @@ import { SupportComponent } from './support/support.component';
     AllOffersComponent,
     OfferComponent,
     ServiceDetailsComponent,
-    SupportComponent
+    SupportComponent,
+    FooterComponent,
   ],
   imports: [
-    BrowserModule
+    MaterializeModule,
+    BrowserModule,
+    StarRatingModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]
