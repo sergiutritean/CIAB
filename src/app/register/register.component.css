@@ -1,0 +1,11 @@
+poza {
+  border: 2px solid #cfd8dc;
+  border-radius: 5px;
+}
+.image-upload > input
+{
+  display: none;
+}
+error {
+  color: red;
+}

@@ -14,8 +14,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isAuth() {
-    console.log(this.userService.token!=null);
-    return (this.userService.token!=null);
+    return (this.userService.token != null);
   }
 
   logout() {

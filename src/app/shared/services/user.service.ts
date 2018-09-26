@@ -19,6 +19,14 @@ export class UserService {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
+  getUsers() {
+    return firebase.database().ref('users');
+  }
+
+  updateDB(url, data) {
+    firebase.database().ref(url).set(data);
+  }
+
   logout() {
     this.token = null;
     firebase.auth().signOut();

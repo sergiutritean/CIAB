@@ -1,7 +1,7 @@
-import 'materialize-css';
 import { MaterializeModule } from 'angular2-materialize';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -71,6 +71,8 @@ const appRoutes: Routes = [
     BrowserModule,
     StarRatingModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
