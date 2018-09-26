@@ -15,14 +15,14 @@ export class AppComponent implements OnInit{
       authDomain: 'caught-in-a-box.firebaseapp.com',
       databaseURL: 'https://caught-in-a-box.firebaseio.com',
       projectId: 'caught-in-a-box',
-      storageBucket: 'caught-in-a-box.appspot.com',
+      storageBucket: 'gs://caught-in-a-box.appspot.com',
       messagingSenderId: '739449080424'
     };
     firebase.initializeApp(config);
   }
 
 
-  onRatingChange(event){
+  onRatingChange(event) {
     console.log(event);
   }
 }

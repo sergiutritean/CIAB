@@ -8,8 +8,8 @@
           <!--Profile image-->
           <div class="image-upload col s12 poza center-align">
             <label for="file-input2" class="center-align">
-              <i class="large material-icons" *ngIf="isNull()">add</i>
-              <img [src]="imageURL" alt="" *ngIf="!isNull()" width="100%" height="100%">
+              <i class="large material-icons" *ngIf="isNull()" >add</i>
+              <img src="{{ imageURL }}" alt="" *ngIf="!isNull()" width="100%" height="100%">
             </label>
             <input id="file-input2" type="file" (change)="onFileChanged($event)"/>
           </div>
@@ -29,6 +29,12 @@
               <input name="account_type" type="radio" id="business" [value]="'business'" formControlName="account_type"/>
               <label for="business">Business</label>
             </p>
+          </div>
+
+          <!--Full name-->
+          <div class="input-field col s12">
+            <label>Full name</label>
+            <input type="text" class="validate" formControlName="name"/>
           </div>
 
           <!--Username-->
@@ -85,7 +91,7 @@
             </p>
           </div>
 
-        <span class="helper-text error" *ngIf = "false"> {{ error }} </span>
+        <span class="helper-text error" *ngIf = "error != null "> {{ error }} </span>
       </div>
 
       <div class="card-action center-align">

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { UserModel } from 'src/app/shared/user.model';
+import { Router } from '@angular/router';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'app-register',
@@ -29,10 +31,12 @@ export class RegisterComponent implements OnInit {
     password2: new FormControl('')
   });
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
-
+    this.image = null;
+    this.imageURL = null;
   }
 
   onRegUser() {
@@ -50,7 +54,7 @@ export class RegisterComponent implements OnInit {
       this.form.value.barter,
       ''
     );
-    if (this.form.value.password1 !== this.form.value.password2){
+    if (this.form.value.password1 !== this.form.value.password2) {
       this.error = 'Passwords don\'t match!';
       return;
     }
@@ -58,20 +62,29 @@ export class RegisterComponent implements OnInit {
     const password = this.form.value.password1;
     this.userService.registerUser(email, password).then(resp => { // Register user in Firebase Auth
       this.currUser.uid = resp.user.uid;
-      this.userService.getUsers().on('value', snap => { // Get users
+      this.userService.getUsers().once('value', snap => { // Get users
         let array = snap.val();
         if ( array === null) {
           array = [];
         }
-        array.push(this.currUser);
-        //this.userService.updateDB('users', array); // Add user to database
+        this.currUser.imageURL = this.currUser.uid + '/profile';
+        this.userService.addImage(this.currUser.imageURL, this.image).on('state_changed',
+          snapshot => {},
+          error => { console.log(error); },
+          () => {
+            array.push(this.currUser);
+            this.userService.updateDB('users', array).then(() => {
+              toast('User added succesfully!');
+              this.router.navigate(['dashboard']);
+            }); // Add user to database
+          });
       });
     }).catch(error => this.error = error);
     console.log(this.currUser);
   }
 
   isNull() { // Checks if no image uploaded
-    return this.imageURL !== null;
+    return this.imageURL == null;
   }
 
   onFileChanged(event) { // Gets profile image

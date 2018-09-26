@@ -24,7 +24,11 @@ export class UserService {
   }
 
   updateDB(url, data) {
-    firebase.database().ref(url).set(data);
+    return firebase.database().ref(url).set(data);
+  }
+
+  addImage(url, image) {
+    return firebase.storage().ref(url).put(image);
   }
 
   logout() {
