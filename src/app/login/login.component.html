@@ -1,3 +1,26 @@
-<p>
-  login works!
-</p>
+<div class="valign-wrapper row login-box">
+  <div class="col card hoverable s12 m6 pull-m3 l4 pull-l4">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form" #f="ngForm">
+      <div class="card-content">
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="email">Email address</label>
+            <input type="email" class="validate" name="email" id="email" required formControlName="email"/>
+          </div>
+          <div class="input-field col s12">
+            <label for="password">Password </label>
+            <input type="password" class="validate" name="password" id="password" required formControlName="password"/>
+          </div>
+        </div>
+        <div class="row">
+          <a routerLink="/forgotpw" style="float: right">Forgot password?</a>
+        </div>
+        <span class="error" *ngIf = "f.submitted"> {{ error }} </span>
+      </div>
+      <div class="card-action right-align">
+        <input type="reset" id="reset" class="btn-flat grey-text waves-effect" value="Register" routerLink="/regClient">
+        <input type="submit" class="btn green waves-effect waves-light" value="Login">
+      </div>
+    </form>
+  </div>
+</div>

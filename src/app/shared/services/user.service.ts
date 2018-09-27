@@ -38,4 +38,8 @@ export class UserService {
     this.router.navigate(['/']);
   }
 
+  isAuthenticated() {
+    return this.token != null;
+  }
+
 }

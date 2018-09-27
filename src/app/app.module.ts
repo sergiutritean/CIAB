@@ -27,11 +27,12 @@ import { FooterComponent } from './footer/footer.component';
 
 import { StarRatingModule } from 'angular-star-rating';
 import { RouterModule, Routes } from '@angular/router';
+import { UserAuthGuardService } from 'src/app/shared/services/user-auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
   { path: 'add_service', component: AddServiceComponent},
-  { path: 'dashboard', component: DashboardComponent},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [UserAuthGuardService]},
   { path: 'feedback', component: FeedbackComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},

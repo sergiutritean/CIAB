@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
           () => {
             array.push(this.currUser);
             this.userService.updateDB('users', array).then(() => {
-              toast('User added succesfully!');
+              toast('User added succesfully!', 1000);
               this.router.navigate(['dashboard']);
             }); // Add user to database
           });
