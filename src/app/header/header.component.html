@@ -1,25 +1,27 @@
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Logo</a>
+    <a id='navLogo' class='brand-logo' routerLink = "/"><img src='../../../assets/images/CIAB.svg'></a>
     <a data-activates="nav-mobile-client" class="button-collapse" materialize="sideNav"
        [materializeParams]="[{menuWidth: 300,edge: 'left', closeOnClick: true, draggable: true}]"><i class="material-icons">menu</i>
     </a>
     <ul id="nav-mobile" class="right hide-on-med-and-down" [ngSwitch]="isAuth()">
-      <li><a routerLink="">Acasa</a></li>
-      <li><a routerLink="">Categorii</a></li> <!-- Dropdown -->
-      <li *ngSwitchCase="true"><a routerLink = "/dashboard">Dashboard</a></li>
-      <li *ngSwitchCase="true"><a (click) = "logout()">Delogare</a></li>
-      <li *ngSwitchCase="false"><a routerLink="/register">Inregistrare</a></li>
-      <li *ngSwitchCase="false"><a routerLink="/login">Logare</a></li>
+      <li routerLinkActive = "active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="">Acasa</a></li>
+      <li routerLinkActive = "active"><a routerLink="">Categorii</a></li> <!-- Dropdown -->
+      <li routerLinkActive = "active"><a routerLink="/services">Servicii</a></li> <!-- Dropdown -->
+      <li routerLinkActive = "active" *ngSwitchCase="true"><a routerLink = "/dashboard">Dashboard</a></li>
+      <li routerLinkActive = "active" *ngSwitchCase="true"><a (click) = "logout()">Delogare</a></li>
+      <li routerLinkActive = "active" *ngSwitchCase="false"><a routerLink="/register">Inregistrare</a></li>
+      <li routerLinkActive = "active" *ngSwitchCase="false"><a routerLink="/login">Logare</a></li>
     </ul>
   </div>
 </nav>
 
 <ul class="side-nav" id="nav-mobile-client" [ngSwitch]="isAuth()">
-  <li><a routerLink="">Acasa</a></li>
-  <li><a routerLink="">Categorii</a></li> <!-- Dropdown -->
-  <li *ngSwitchCase="true"><a routerLink = "/dashboard">Dashboard</a></li>
-  <li *ngSwitchCase="true"><a (click) = "logout()">Delogare</a></li>
-  <li *ngSwitchCase="false"><a routerLink="/register">Inregistrare</a></li>
-  <li *ngSwitchCase="false"><a routerLink="/login">Logare</a></li>
+  <li routerLinkActive = "active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="">Acasa</a></li>
+  <li routerLinkActive = "active"><a routerLink="">Categorii</a></li> <!-- Dropdown -->
+  <li routerLinkActive = "active"><a routerLink="/services">Servicii</a></li> <!-- Dropdown -->
+  <li routerLinkActive = "active" *ngSwitchCase="true"><a routerLink = "/dashboard">Dashboard</a></li>
+  <li routerLinkActive = "active" *ngSwitchCase="true"><a (click) = "logout()">Delogare</a></li>
+  <li routerLinkActive = "active" *ngSwitchCase="false"><a routerLink="/register">Inregistrare</a></li>
+  <li routerLinkActive = "active" *ngSwitchCase="false"><a routerLink="/login">Logare</a></li>
 </ul>

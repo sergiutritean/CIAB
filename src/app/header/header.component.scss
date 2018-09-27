@@ -1,0 +1,11 @@
+#navLogo,
+#navLogo * {
+	height: 100%;
+	width: auto;
+}
+#navLogo {
+	//position: inherit;
+}
+nav ul li.active {
+	background-color: rgba(255, 255, 255, 0.1);
+}
