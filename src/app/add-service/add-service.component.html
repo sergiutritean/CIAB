@@ -1,3 +1,61 @@
-<p>
-  add-service works!
-</p>
+<div class="valign-wrapper row">
+  <div class="col card hoverable s12">
+    <form #f='ngForm'>
+      <div class="card-content">
+        <div class="row">
+          <fieldset class="col s12">
+            <legend>Tip serviciu</legend>
+            <p>
+              <label>
+                <input class="with-gap" name="type" value="0" type="radio" selected  />
+                <span>Ofertă</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input class="with-gap" name="type" value="1" type="radio"  />
+                <span>Cerere</span>
+              </label>
+            </p>
+          </fieldset>
+
+          <div class="input-field col s12">
+            <label for='nsFormTitle'>Titlu</label>
+            <input type='text' id='nsFormTitle' name='title' >
+          </div>
+
+          <div class="input-field col s12">
+            <label for='nsFormDescription'>Descriere</label>
+            <textarea class="materialize-textarea" id='nsFormDescription' name='description' ></textarea>
+          </div>
+
+          <div class="file-field input-field col s12">
+            <div class="btn">
+              <span>Poze</span>
+              <input type="file" multiple name="photos" >
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Upload one or more files">
+            </div>
+          </div>
+
+          <p>
+            <label>
+              <input type="checkbox" name="barter" />
+              <span>Barter</span>
+            </label>
+          </p>
+
+          <div class="input-field col s12">
+            <label for='nsFormPrice'>Preț</label>
+            <input type='text' id='nsFormPrice' name='price' >
+          </div>
+        </div>
+
+        <div class="card-action center-align">
+          <button class="waves-effect waves-light btn-large" type="submit">Creează serviciu</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
