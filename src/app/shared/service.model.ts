@@ -1,6 +1,4 @@
-
-
-export class Service {
+export class ServiceModel {
 
   public barter: boolean;
   public title: string;
@@ -10,6 +8,7 @@ export class Service {
   public imagePath: string[];
   public fromUser: string;
   public uid: string;
+  public isOffer: boolean;
 
   constructor(barter: boolean,
               title: string,
@@ -18,7 +17,8 @@ export class Service {
               category: string,
               imagePath: string[],
               fromUser: string,
-              uid: string) {
+              uid: string,
+              isOffer: boolean) {
 
     this.barter = barter;
     this.title = title;
@@ -28,6 +28,7 @@ export class Service {
     this.imagePath = imagePath;
     this.fromUser = fromUser;
     this.uid = uid;
+    this.isOffer = isOffer;
   }
 
 }

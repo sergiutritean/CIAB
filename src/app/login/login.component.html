@@ -1,6 +1,6 @@
 <div class="valign-wrapper row login-box">
     <div class="col card hoverable s12 m6 pull-m3 l4 pull-l4">
-      <form [formGroup]="form" #f="ngForm">
+      <form [formGroup]="form" #f="ngForm" (submit)="onSubmit()">
         <div class="card-content">
 
           <div class="row">
@@ -15,11 +15,12 @@
             <!--Password-->
             <div class="input-field col s12">
               <label>Password</label>
-              <input type="password" class="validate" formControlName="password1"/>
-              <span class="helper-text error" *ngIf = "!form.get('password1').valid && (form.get('password1').touched || f.submitted)"> Please enter a password! </span>
+              <input type="password" class="validate" formControlName="password"/>
+              <span class="helper-text error" *ngIf = "!form.get('password').valid && (form.get('password').touched || f.submitted)"> Please enter a password! </span>
             </div>
 
-          <span class="helper-text error" *ngIf = "false"> {{ error }} </span>
+
+          <span class="helper-text error" *ngIf = "error != null"> {{ error }} </span>
         </div>
 
         <div class="card-action center-align">

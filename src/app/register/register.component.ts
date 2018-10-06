@@ -62,6 +62,7 @@ export class RegisterComponent implements OnInit {
     const password = this.form.value.password1;
     this.userService.registerUser(email, password).then(resp => { // Register user in Firebase Auth
       this.currUser.uid = resp.user.uid;
+      this.userService.uid = resp.user.uid;
       this.userService.getUsers().once('value', snap => { // Get users
         let array = snap.val();
         if ( array === null) {
@@ -73,8 +74,8 @@ export class RegisterComponent implements OnInit {
           error => { console.log(error); },
           () => {
             array.push(this.currUser);
-            this.userService.updateDB('users', array).then(() => {
-              toast('User added succesfully!');
+            this.userService.updateDB(array).then(() => {
+              toast('User added succesfully!', 1000);
               this.router.navigate(['dashboard']);
             }); // Add user to database
           });
