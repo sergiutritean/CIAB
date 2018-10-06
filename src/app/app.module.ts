@@ -10,7 +10,7 @@ import { SearchBarComponent } from './home-page/search-bar/search-bar.component'
 import { PartnersComponent } from './home-page/partners/partners.component';
 import { AddServiceComponent } from './add-service/add-service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ServicesComponent } from './dashboard/services/services.component';
+import { ServicesComponent } from './services/services.component';
 import { ServiceComponent } from './dashboard/services/service/service.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { RegisterComponent } from './register/register.component';
@@ -19,8 +19,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ReviewsComponent } from './profile/reviews/reviews.component';
 import { ReviewComponent } from './profile/reviews/review/review.component';
 import { FilterComponent } from './services/filter/filter.component';
-import { AllOffersComponent } from './services/all-offers/all-offers.component';
-import { OfferComponent } from './services/all-offers/offer/offer.component';
+import { AllServicesComponent } from './services/all-services/all-services.component';
+import { OfferComponent } from './services/all-services/offer/offer.component';
 import { ServiceDetailsComponent } from './service/service-details/service-details.component';
 import { SupportComponent } from './support/support.component';
 import { FooterComponent } from './footer/footer.component';
@@ -61,7 +61,7 @@ const appRoutes: Routes = [
     ReviewsComponent,
     ReviewComponent,
     FilterComponent,
-    AllOffersComponent,
+    AllServicesComponent,
     OfferComponent,
     ServiceDetailsComponent,
     SupportComponent,
