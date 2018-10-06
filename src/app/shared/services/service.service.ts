@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import * as firebase from 'firebase';
+import { ServiceModel } from 'src/app/shared/service.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,20 @@ export class ServiceService {
 
   getUniqueID() {
     return '_' + Math.random().toString(36).substr(2, 9);
+  }
+
+  addService(service: ServiceModel) {
+    const url = 'services/' + service.fromUser + '/' + service.uid;
+    let services = [];
+    firebase.database().ref(url).on( 'value', snap => {
+      services = snap.val();
+    });
+    services.push(service);
+    return firebase.database().ref(url).update(services);
+  }
+
+  addImage(url, image) {
+    return firebase.storage().ref(url).put(image);
   }
 
 }

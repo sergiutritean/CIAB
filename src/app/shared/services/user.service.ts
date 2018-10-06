@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 export class UserService {
 
   token: string;
+  uid: string;
 
   constructor(private router: Router) { }
 
@@ -23,8 +24,8 @@ export class UserService {
     return firebase.database().ref('users');
   }
 
-  updateDB(url, data) {
-    return firebase.database().ref(url).set(data);
+  updateDB(data) {
+    return firebase.database().ref('users').set(data);
   }
 
   addImage(url, image) {

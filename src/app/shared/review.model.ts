@@ -1,6 +1,6 @@
 import { from } from 'rxjs/index';
 
-export class Review {
+export class ReviewModel {
   public rating: number;
   public imagePath: string[];
   public content: string;

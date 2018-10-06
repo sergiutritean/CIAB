@@ -31,7 +31,7 @@ import { UserAuthGuardService } from 'src/app/shared/services/user-auth-guard.se
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
-  { path: 'add_service', component: AddServiceComponent},
+  { path: 'add_service', component: AddServiceComponent, canActivate: [UserAuthGuardService]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [UserAuthGuardService]},
   { path: 'feedback', component: FeedbackComponent},
   { path: 'register', component: RegisterComponent},
@@ -75,7 +75,9 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    UserAuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
