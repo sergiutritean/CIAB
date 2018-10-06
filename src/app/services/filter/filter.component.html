@@ -1,3 +1,90 @@
-<p>
-  filter works!
-</p>
+<div class="row grey lighten-5" id="servicesFilter">
+  <form action="">
+    <div>
+      <div class="input-field col s12">
+        <input type="text" placeholder="Caută">
+      </div>
+    </div>
+
+    <div>
+      <div class="col s12">
+        <fieldset>
+          <legend>Tip serviciu</legend>
+          <p>
+            <label>
+              <input name="type" type="radio" value="0" checked/>
+              <span>Ofertă</span>
+            </label>
+          </p>
+          <p>
+            <label>
+              <input name="type" type="radio" value="1"/>
+              <span>Cerere</span>
+            </label>
+          </p>
+        </fieldset>
+      </div>
+    </div>
+
+    <div>
+      <div class="col s12">
+        <fieldset>
+          <legend>Categorie</legend>
+          <p>
+            <label>
+              <input type="radio" name="cat" value="-1" checked/>
+              <span>Toate</span>
+            </label>
+          </p>
+          <ng-template ngFor let-category [ngForOf]="categories" let-i="index">
+            <p>
+              <label>
+                <input type="radio" name="cat" value="{{ i }}"/>
+                <span>{{ category.name }}</span>
+              </label>
+            </p>
+          </ng-template>
+        </fieldset>
+      </div>
+    </div>
+
+    <div>
+      <div class="col s12">
+        <fieldset>
+          <legend>Locație</legend>
+        </fieldset>
+      </div>
+    </div>
+
+    <div>
+      <div class="col s12">
+        <p>
+          <label>
+            <input type="checkbox" checked/>
+            <span>Barter</span>
+          </label>
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="col s12">
+        <fieldset>
+          <legend>Preț</legend>
+          <div>
+            <input type="text" placeholder="Minim">
+          </div>
+          <div>
+            <input type="text" placeholder="Maxim">
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <div>
+      <div class="col s12">
+        <button class="waves-effect waves-light btn-large" type="submit">Filtrează servicii</button>
+      </div>
+    </div>
+  </form>
+</div>
