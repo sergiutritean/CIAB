@@ -29,20 +29,13 @@
           <div class="file-field input-field col s12">
             <div class="btn">
               <span>Poze</span>
-              <input type="file" multiple name="photos" (change)="onChange($event, inputFiles)">
+              <input type="file" multiple name="photos" (change)="onChange($event)">
               <input type="text" #inputFiles>
             </div>
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text" placeholder="Upload one or more files">
             </div>
           </div>
-
-          <!--<p>
-            <label>
-              <input type="checkbox" name="barter" />
-              <span>Barter</span>
-            </label>
-          </p>-->
 
           <div class="col s12">
             <p>

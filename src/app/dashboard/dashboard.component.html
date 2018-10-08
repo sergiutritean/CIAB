@@ -1,0 +1,21 @@
+<h3>Dashboard</h3>
+<div class="row">
+  <div class="col s3 flow-text"
+       (click)="changeStatus('my_services')"
+       style="cursor: pointer"
+       >Serviciile mele</div>
+
+  <div class="col s3 flow-text"
+       (click)="changeStatus('services_progress')"
+       style="cursor: pointer">Servicii progress</div>
+
+  <div class="col s3 flow-text"
+       (click)="changeStatus('services_done')"
+       style="cursor: pointer">Servicii terminate</div>
+
+  <div class="col s3 flow-text"
+       (click)="changeStatus('services_waiting')"
+       style="cursor: pointer">Servicii în așteptare</div>
+</div>
+<app-services [services] = "servicesToPass" class="flow-text"></app-services>
+<!-- TODO: bold active texts-->

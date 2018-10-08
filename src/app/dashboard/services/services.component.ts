@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ServiceModel } from 'src/app/shared/service.model';
 
 @Component({
   selector: 'app-services',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./services.component.scss']
 })
 export class ServicesComponent implements OnInit {
+
+  @Input() services: ServiceModel;
 
   constructor() { }
 
