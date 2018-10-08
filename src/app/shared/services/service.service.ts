@@ -16,15 +16,20 @@ export class ServiceService {
   addService(service: ServiceModel) {
     const url = 'services/' + service.fromUser + '/' + service.uid;
     let services = [];
-    firebase.database().ref(url).on( 'value', snap => {
+    firebase.database().ref(url).once( 'value', snap => {
       services = snap.val();
     });
+    if(!services) services = [];
     services.push(service);
     return firebase.database().ref(url).update(services);
   }
 
   addImage(url, image) {
     return firebase.storage().ref(url).put(image);
+  }
+
+  getServices() {
+    return firebase.database().ref('services');
   }
 
 }

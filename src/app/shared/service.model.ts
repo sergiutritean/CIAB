@@ -9,6 +9,8 @@ export class ServiceModel {
   public fromUser: string;
   public uid: string;
   public isOffer: boolean;
+  public status: string;
+  public price: number;
 
   constructor(barter: boolean,
               title: string,
@@ -18,7 +20,9 @@ export class ServiceModel {
               imagePath: string[],
               fromUser: string,
               uid: string,
-              isOffer: boolean) {
+              isOffer: boolean,
+              status: string,
+              price: number) {
 
     this.barter = barter;
     this.title = title;
@@ -29,6 +33,8 @@ export class ServiceModel {
     this.fromUser = fromUser;
     this.uid = uid;
     this.isOffer = isOffer;
+    this.status = status;
+    this.price = price;
   }
 
 }

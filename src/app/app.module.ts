@@ -11,7 +11,7 @@ import { PartnersComponent } from './home-page/partners/partners.component';
 import { AddServiceComponent } from './add-service/add-service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ServicesComponent } from './dashboard/services/services.component';
-import { ServiceComponent } from './dashboard/services/service/service.component';
+import { ShowServiceComponent } from './dashboard/services/show-service/show-service.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -38,7 +38,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'services', component: ServicesComponent, children: [
-    { path: ':id', component: ServiceComponent},
+    { path: ':id', component: ShowServiceComponent},
   ]},
   { path: 'support', component: SupportComponent},
 ];
@@ -53,7 +53,7 @@ const appRoutes: Routes = [
     AddServiceComponent,
     DashboardComponent,
     ServicesComponent,
-    ServiceComponent,
+    ShowServiceComponent,
     FeedbackComponent,
     RegisterComponent,
     LoginComponent,
