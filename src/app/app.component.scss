@@ -1,3 +1,10 @@
+$roboto-font-path: "~materialize-css/dist/fonts/roboto/";
+@import "~materialize-css/sass/materialize";
+
 .footer {
   width: 100%;
+}
+
+main {
+  min-height: calc(100vh - #{$navbar-height});
 }
