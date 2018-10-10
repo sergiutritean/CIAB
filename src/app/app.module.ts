@@ -18,9 +18,10 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ReviewsComponent } from './profile/reviews/reviews.component';
 import { ReviewComponent } from './profile/reviews/review/review.component';
-import { FilterComponent } from './services/filter/filter.component';
-import { AllOffersComponent } from './services/all-offers/all-offers.component';
-import { OfferComponent } from './services/all-offers/offer/offer.component';
+import { FilterComponent} from 'src/app/all-services/filter/filter.component';
+import { AllServicesComponent } from 'src/app/all-services/all-services.component';
+import { AllOffersComponent } from 'src/app/all-services/all-offers/all-offers.component';
+import { OfferComponent } from 'src/app/all-services/all-offers/offer/offer.component';
 import { ServiceDetailsComponent } from './service/service-details/service-details.component';
 import { SupportComponent } from './support/support.component';
 import { FooterComponent } from './footer/footer.component';
@@ -28,6 +29,7 @@ import { FooterComponent } from './footer/footer.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { RouterModule, Routes } from '@angular/router';
 import { UserAuthGuardService } from 'src/app/shared/services/user-auth-guard.service';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
@@ -37,7 +39,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'services', component: ServicesComponent, children: [
+  { path: 'services', component: AllServicesComponent, children: [
     { path: ':id', component: ShowServiceComponent},
   ]},
   { path: 'support', component: SupportComponent},
@@ -66,6 +68,7 @@ const appRoutes: Routes = [
     ServiceDetailsComponent,
     SupportComponent,
     FooterComponent,
+    AllServicesComponent
   ],
   imports: [
     MaterializeModule,

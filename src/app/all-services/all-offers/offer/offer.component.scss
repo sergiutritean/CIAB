@@ -1,0 +1,52 @@
+.serviceItem {
+  align-items: center;
+  margin-bottom: 1rem;
+  border-radius: .5rem;
+  border: 1px solid #DFDFDF;
+  height: 10rem;
+
+  .col {
+    height: 100%;
+  }
+
+  .servicePhoto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .serviceData1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    * {
+      margin: 0;
+    }
+    .serviceTitle {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    .serviceRating {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+  .serviceData2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    * {
+      margin: 0;
+      text-align: right;
+      margin-right: 1rem;
+    }
+    .servicePrice {
+      font-weight: bold;
+    }
+    .serviceBarter {
+      font-weight: bold;
+    }
+  }
+}

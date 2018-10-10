@@ -13,7 +13,8 @@ export class ServicesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.services = [
+    console.log(this.services);
+    /*this.services = [
       new ServiceModel(
         true,
         "Titlululululululu",
@@ -40,7 +41,7 @@ export class ServicesComponent implements OnInit {
         "Complete",
         99.99
       )
-    ];
+    ];*/
   }
 
 }

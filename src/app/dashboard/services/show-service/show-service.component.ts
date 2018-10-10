@@ -13,7 +13,7 @@ export class ShowServiceComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    console.log(this.service);
   }
 
 }

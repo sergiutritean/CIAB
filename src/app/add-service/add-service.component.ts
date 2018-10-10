@@ -87,8 +87,7 @@ export class AddServiceComponent implements OnInit {
 
   onChange(event: any, input: any) {
     const files = [].slice.call(event.target.files);
-    //input.value = files.map(f => f.name).join(', ');
-    const indMax = files.length-2;
+    const indMax = files.length-1;
     for ( let i = 0;i<=indMax;++i) {
       if (event.target.files && files[i]) {
         const reader = new FileReader();
