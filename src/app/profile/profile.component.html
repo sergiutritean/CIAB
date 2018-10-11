@@ -1,3 +1,41 @@
-<p>
-  profile works!
-</p>
+<div class="row">
+  <div class="col s2">
+    <img src="{{ user.imageURL }}" alt="">
+  </div>
+  <div class="col s7">
+    <h2>{{ user.name }}</h2>
+    <p>@{{ user.username }}</p>
+  </div>
+  <div class="col s1">
+    <p><span class="amber-text text-darken-1">★</span>{{ user.rating }}</p>
+    <p><b>{{ user.accountType }}</b></p>
+    <p *ngIf="user.barter" class="green-text"> ✓ Barter</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+  <h3>Descriere</h3>
+  <span>
+    {{ user.desc}}
+  </span>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h3>Contact</h3>
+    <ul>
+      <li><b>Mail: </b>   {{ user.email }}</li>
+      <li><b>Telefon: </b>{{ user.phone }}</li>
+      <li><b>Locatie: </b>{{ user.location }}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s6">
+    <h2>Reviews</h2>
+  </div>
+  <div class="col s6">
+    <h2>Services</h2>
+  </div>
+</div>

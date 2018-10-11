@@ -1,3 +1,29 @@
-<p>
-  review works!
-</p>
+<div class="row">
+  <div class="review">
+    <p class="reviewTitle">{{ review.fromUser }}</p>
+    <div class="reviewRating">
+      <span class="amber-text text-darken-1"
+        *ngIf="review.rating == 1">★</span>
+      <span class="amber-text text-darken-1"
+        *ngIf="review.rating == 2">★★</span>
+      <span class="amber-text text-darken-1"
+        *ngIf="review.rating == 3">★★★</span>
+      <span class="amber-text text-darken-1"
+        *ngIf="review.rating == 4">★★★★</span>
+      <span class="amber-text text-darken-1"
+        *ngIf="review.rating == 5">★★★★★</span>
+    </div>
+    <div class="reviewContent">
+      {{ review.content}}
+    </div>
+    <div class="reviewPhotos">
+      <div *ngFor="let photo of review.imagePath">
+        <img
+            class="materialboxed"
+            height="100px"
+            width="auto"
+            src='{{ photo }}'>
+      </div>
+    </div>
+  </div>
+</div>
