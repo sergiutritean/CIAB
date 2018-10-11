@@ -9,6 +9,8 @@ export class AllOffersComponent implements OnInit {
 
   @Input() services;
 
+
+
   constructor() { }
 
   ngOnInit() {

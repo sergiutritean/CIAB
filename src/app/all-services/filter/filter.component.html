@@ -2,7 +2,7 @@
   <form [formGroup]="form" (submit)="onSubmit()">
     <div>
       <div class="input-field col s12">
-        <input type="text" placeholder="Caută">
+        <input type="text" placeholder="Caută" formControlName="title">
       </div>
     </div>
 
@@ -27,33 +27,16 @@
         <fieldset>
           <legend>Categorie</legend>
           <p>
-            <input name="all" type="radio" id="all" [value]="true" formControlName="all"/>
+            <input name="all" type="checkbox" id="all" [value]="false" formControlName="all" checked="checked"/>
             <label for="all">Toate</label>
           </p>
-          <!--<ng-template ngFor let-category [ngForOf]="categories" let-i="index">
-            <p>
-              <label>
-                <input type="radio" name="cat" value="{{ i }}"/>
-                <span>{{ category.name }}</span>
-              </label>
-            </p>
-          </ng-template>-->
         </fieldset>
       </div>
     </div>
 
-    <!--<div>
-      <div class="col s12">
-        <fieldset>
-          <legend>Titlu</legend>
-          <input type='text' id='nsFormTitle' name='title' formControlName="title">
-        </fieldset>
-      </div>
-    </div>-->
-
     <div>
       <div class="col s12">
-        <fieldset formGroup="price">
+        <fieldset formGroupName="price">
           <legend>Preț</legend>
           <div>
             <input type="number" placeholder="Minim" formControlName="min">
@@ -68,7 +51,7 @@
     <div class="col s12">
       <fieldset>
         <p>
-          <input type="checkbox" class="filled-in" id="barter" checked="checked" formControlName="barter"/>
+          <input type="checkbox" id="barter" checked="checked" formControlName="barter"/>
           <label for="barter">Barter</label>
         </p>
       </fieldset>
