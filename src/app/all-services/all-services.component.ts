@@ -25,4 +25,8 @@ export class AllServicesComponent implements OnInit {
     });
   }
 
+  filter(event) {
+
+  }
+
 }

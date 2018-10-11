@@ -31,6 +31,8 @@ import { StarRatingModule } from 'angular-star-rating';
 import { RouterModule, Routes } from '@angular/router';
 import { UserAuthGuardService } from 'src/app/shared/services/user-auth-guard.service';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
   { path: 'add_service', component: AddServiceComponent, canActivate: [UserAuthGuardService]},
@@ -78,7 +80,8 @@ const appRoutes: Routes = [
     StarRatingModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [
     UserAuthGuardService
