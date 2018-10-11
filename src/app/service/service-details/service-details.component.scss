@@ -1,0 +1,41 @@
+#photoShow {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	border-radius: .5rem;
+	border: 1px solid #DFDFDF;
+
+	overflow: hidden;
+}
+#photosMin {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 1rem 0rem;
+
+	> div {
+		border-radius: .5rem;
+		border: 1px solid #DFDFDF;
+		margin-right: 1rem;
+	}
+}
+
+#serviceInfo {
+	#serviceData1 {
+		#serviceBarter {
+			font-weight: bold;
+		}
+	}
+	#serviceData2 {
+		#servicePrice {
+			font-weight: bold;
+		}
+	}
+}
+#serviceReviews {
+}

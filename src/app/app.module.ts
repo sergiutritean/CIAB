@@ -12,6 +12,7 @@ import { AddServiceComponent } from './add-service/add-service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ServicesComponent } from './dashboard/services/services.component';
 import { ShowServiceComponent } from './dashboard/services/show-service/show-service.component';
+import { ServiceComponent } from './service/service.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -30,7 +31,6 @@ import { StarRatingModule } from 'angular-star-rating';
 import { RouterModule, Routes } from '@angular/router';
 import { UserAuthGuardService } from 'src/app/shared/services/user-auth-guard.service';
 
-
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
   { path: 'add_service', component: AddServiceComponent, canActivate: [UserAuthGuardService]},
@@ -39,8 +39,9 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'services', component: AllServicesComponent, children: [
-    { path: ':id', component: ShowServiceComponent},
+  { path: 'services', children: [
+    { path: '', component: AllServicesComponent, pathMatch: 'full'},
+    { path: ':id', component: ServiceComponent}
   ]},
   { path: 'support', component: SupportComponent},
 ];
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
     ServiceDetailsComponent,
     SupportComponent,
     FooterComponent,
-    AllServicesComponent
+    AllServicesComponent,
+    ServiceComponent
   ],
   imports: [
     MaterializeModule,

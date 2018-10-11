@@ -1,3 +1,40 @@
-<p>
-  service-details works!
-</p>
+<div class="row">
+  <div class="col s6" id="servicePhotos">
+    <div id="photoShow">
+      <img  height="300px"
+          width="auto"
+          src='{{ service.imagePath[0] }}'>
+    </div>
+    <div id="photosMin">
+      <div *ngFor="let photo of service.imagePath">
+        <img
+            class="materialboxed"
+            height="100px"
+            width="auto"
+            src='{{ photo }}'>
+      </div>
+    </div>
+  </div>
+  <div class="col s6" id="serviceInfo">
+    <div id="serviceData1" class="">
+      <h4 id="serviceTitle">{{ service.title }}</h4>
+      <p id="serviceBarter" class="green-text" *ngIf="service.barter">✓ Barter</p>
+      <p id="serviceDescription">{{ service.description }}</p>
+    </div>
+    <div id="serviceData2" class="">
+      <p id="serviceRating"><span class="amber-text text-darken-1">★</span>{{ service.rating }}</p>
+      <p id="servicePrice">{{ service.price }}</p>
+      <div id="serviceBuyButton">
+        <form action="">
+          <button class="waves-effect waves-light btn-large" type="submit">Cumpără</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div id="serviceContent">
+      <h2>Descriere</h2>
+      <p>Poate aici ceva cu TinyMCE</p>
+  </div>
+</div>
