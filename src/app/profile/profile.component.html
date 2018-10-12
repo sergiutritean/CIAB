@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row" *ngIf = "hasUser">
   <div class="col s2">
-    <img src="{{ user.imageURL }}" alt="">
+    <img src="{{ user.imageURL[0] }}" alt="">
   </div>
   <div class="col s7">
     <h2>{{ user.name }}</h2>
@@ -12,7 +12,7 @@
     <p *ngIf="user.barter" class="green-text"> ✓ Barter</p>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf = "hasUser">
   <div class="col">
   <h3>Descriere</h3>
   <span>
@@ -20,7 +20,7 @@
   </span>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf = "hasUser">
   <div class="col">
     <h3>Contact</h3>
     <ul>
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf = "hasUser">
   <div class="col s6">
     <h2>Reviews</h2>
   </div>

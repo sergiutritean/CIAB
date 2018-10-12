@@ -28,7 +28,8 @@ export class ServiceService {
     return firebase.storage().ref(url).put(image);
   }
 
-  getServices() {
+  getServices(...args) {
+    if(args) return firebase.database().ref('services/'+args);
     return firebase.database().ref('services');
   }
 

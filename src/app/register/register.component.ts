@@ -68,9 +68,9 @@ export class RegisterComponent implements OnInit {
         if ( array === null) {
           array = [];
         }
-        this.currUser.imageURL = this.currUser.uid + '/profile';
+        this.currUser.imageURL = this.imageURL;
         this.userService.addImage(this.currUser.imageURL, this.image).on('state_changed',
-          snapshot => {},
+          snapshot => { console.log(snapshot)},
           error => { console.log(error); },
           () => {
             array.push(this.currUser);
