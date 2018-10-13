@@ -10,6 +10,7 @@ import { ServiceService } from 'src/app/shared/services/service.service';
 export class AllServicesComponent implements OnInit {
 
   services = [];
+  servicesToShow = [];
 
   constructor(private userService: UserService,
               private serviceService: ServiceService) { }
@@ -20,13 +21,57 @@ export class AllServicesComponent implements OnInit {
         this.services.push(...snap.val()[key][key2]);
 
       this.services = this.services.filter( service => service.fromUser !== this.userService.uid);
-
+      this.servicesToShow = this.services.slice();
       console.log(this.services);
     });
   }
 
   filter(event) {
+    console.log(event);
+    this.servicesToShow = [...this.services];
+    console.log(this.servicesToShow, this.services);
+    const title = event.title;
+    const service_type = event.service_type;
+    const all_categories = event.all;
+    const price = event.price;
+    const barter = event.barter;
 
+    //title
+    if(title) {
+      this.servicesToShow = this.servicesToShow.filter( service => {
+        return service.title.search(title) === 0;
+      });
+    }
+
+    //service_type
+    if(service_type) {
+      this.servicesToShow = this.servicesToShow.filter( service => {
+        return service.service_type === service_type;
+      });
+    }
+
+    //all_categories
+    /* TODO: To add categories*/
+
+    //price
+    if(price.max) {
+      console.log("MAX"+price.max);
+      this.servicesToShow = this.servicesToShow.filter( service => {
+        return service.price <= price.max;
+      });
+    }
+    if(price.min) {
+      console.log("MIN"+price.min);
+      this.servicesToShow = this.servicesToShow.filter( service => {
+        return service.price >= price.min;
+      });
+    }
+
+    //barter
+    this.servicesToShow = this.servicesToShow.filter( service => {
+      return service.barter === barter;
+    });
+    console.log(this.servicesToShow);
   }
 
 }
