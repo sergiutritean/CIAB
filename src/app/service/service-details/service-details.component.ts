@@ -12,6 +12,7 @@ export class ServiceDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.service);
   }
 
 }

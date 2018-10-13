@@ -1,17 +1,17 @@
 <div class="row">
   <div class="col s6" id="servicePhotos">
     <div id="photoShow">
-      <img  height="300px"
-          width="auto"
-          src='{{ service.imagePath[0] }}'>
+      <img height="300px"
+           width="auto"
+           [src]="service.imagePath[0]">
     </div>
     <div id="photosMin">
       <div *ngFor="let photo of service.imagePath">
-        <img
-            class="materialboxed"
-            height="100px"
-            width="auto"
-            src='{{ photo }}'>
+        <img materialize="materialbox"
+             class="materialboxed"
+             height="100px"
+             width="auto"
+             [src]="photo">
       </div>
     </div>
   </div>
@@ -19,6 +19,7 @@
     <div id="serviceData1" class="">
       <h4 id="serviceTitle">{{ service.title }}</h4>
       <p id="serviceBarter" class="green-text" *ngIf="service.barter">✓ Barter</p>
+      <p id="serviceDescription">{{ service.desc }}</p>
     </div>
     <div id="serviceData2" class="">
       <!--

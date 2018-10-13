@@ -1,4 +1,4 @@
-<app-service-details [service]="service"></app-service-details>
+<app-service-details *ngIf="service != null" [service]="service"></app-service-details>
 <div class="row">
   <div id="serviceReviews">
     <h2>Reviews</h2>

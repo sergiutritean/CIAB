@@ -1,16 +1,4 @@
-<app-offer *ngFor="let service of services"
-           [service] = "service"></app-offer>
-<!--<ul class="pagination">
-  <li class="disabled"><a routerLink='' ><i class="material-icons">chevron_left</i></a></li>
-  <li class="active"><a routerLink='' >1</a></li>
-  <li class="waves-effect"><a routerLink='' >2</a></li>
-  <li class="waves-effect"><a routerLink='' >3</a></li>
-  <li class="waves-effect"><a routerLink='' >4</a></li>
-  <li class="waves-effect"><a routerLink='' >5</a></li>
-  <li class="waves-effect"><a routerLink='' ><i class="material-icons">chevron_right</i></a></li>
-</ul>-->
-<ul>
-  <li *ngFor="let item of services | paginate: { itemsPerPage: 10, currentPage: p }"> ... </li>
-</ul>
-
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
+<app-offer *ngFor="let item of services | paginate: { itemsPerPage: 4, currentPage: p }" [service]="item"></app-offer>
+<div class="valign-wrapper">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

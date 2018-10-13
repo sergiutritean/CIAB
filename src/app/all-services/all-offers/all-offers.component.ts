@@ -14,6 +14,7 @@ export class AllOffersComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.services);
   }
 
 }
