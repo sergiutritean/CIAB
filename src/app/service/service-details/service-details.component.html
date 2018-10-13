@@ -19,10 +19,41 @@
     <div id="serviceData1" class="">
       <h4 id="serviceTitle">{{ service.title }}</h4>
       <p id="serviceBarter" class="green-text" *ngIf="service.barter">✓ Barter</p>
-      <p id="serviceDescription">{{ service.description }}</p>
     </div>
     <div id="serviceData2" class="">
-      <p id="serviceRating"><span class="amber-text text-darken-1">★</span>{{ service.rating }}</p>
+      <!--
+				<p id="serviceRating"><span class="amber-text text-darken-1">★</span>{{ service.rating }}</p>
+			-->
+			<div class="rating medium star-icon value-{{ service.rating-1  | number: 0 }} half label-left">
+				<div class="label-value">{{ service.rating }}</div>
+				<div class="star-container">
+					<div class="star">
+						<i class="star-empty"></i>
+						<i class="star-half"></i>
+						<i class="star-filled"></i>
+					</div>
+					<div class="star">
+						<i class="star-empty"></i>
+						<i class="star-half"></i>
+						<i class="star-filled"></i>
+					</div>
+					<div class="star">
+						<i class="star-empty"></i>
+						<i class="star-half"></i>
+						<i class="star-filled"></i>
+					</div>
+					<div class="star">
+						<i class="star-empty"></i>
+						<i class="star-half"></i>
+						<i class="star-filled"></i>
+					</div>
+					<div class="star">
+						<i class="star-empty"></i>
+						<i class="star-half"></i>
+						<i class="star-filled"></i>
+					</div>
+				</div>
+			</div>
       <p id="servicePrice">{{ service.price }}</p>
       <div id="serviceBuyButton">
         <form action="">
@@ -34,7 +65,7 @@
 </div>
 <div class="row">
   <div id="serviceContent">
-      <h2>Descriere</h2>
-      <p>Poate aici ceva cu TinyMCE</p>
-  </div>
+		<h2>Descriere</h2>
+		<p id="serviceDescription">{{ service.description }}</p>
+	</div>
 </div>

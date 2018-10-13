@@ -1,26 +1,21 @@
-#photoShow {
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-	border-radius: .5rem;
-	border: 1px solid #DFDFDF;
-
-	overflow: hidden;
-}
-#photosMin {
+.reviewPhotos {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	justify-content: flex-start;
 	align-content: center;
 	align-items: center;
 	width: 100%;
 	margin: 1rem 0rem;
 
+	overflow: auto hidden;
+
 	> div {
 		border-radius: .5rem;
 		border: 1px solid #DFDFDF;
 		margin-right: 1rem;
 	}
+}
+.rating {
+	justify-content: flex-start;
 }

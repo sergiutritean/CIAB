@@ -26,6 +26,16 @@
             <textarea class="materialize-textarea" id='nsFormDescription' name='description' formControlName="desc"></textarea>
           </div>
 
+					<div class="input-field col s12" materialize>
+						<select materialize="material_select" [materializeSelectOptions]="categories">
+							<option value="" disabled selected>Alegeți categoria</option>
+							<option *ngFor="let category of categories" [value]="option.value">
+								{{ category.name }}
+							</option>
+						</select>
+						<label>Categorie</label>
+					</div>
+
           <div class="file-field input-field col s12">
             <div class="btn">
               <span>Poze</span>
