@@ -7,15 +7,15 @@
     </div>
 
     <div>
-      <div class="col s12">
+      <div class="col s12" formGroupName="service_type">
         <fieldset>
           <legend>Tip serviciu</legend>
           <p>
-            <input name="service_type" type="radio" id="offer" [value]="'offer'" formControlName="service_type"/>
+            <input name="service_type" type="checkbox" id="offer" [checked]="'offer'" formControlName="offer"/>
             <label for="offer">Ofertă</label>
           </p>
           <p>
-            <input name="service_type" type="radio" id="request" [value]="'request'" formControlName="service_type"/>
+            <input name="service_type" type="checkbox" id="request" [checked]="'request'" formControlName="request"/>
             <label for="request">Cerere</label>
           </p>
         </fieldset>

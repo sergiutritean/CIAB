@@ -63,21 +63,27 @@ export class RegisterComponent implements OnInit {
     this.userService.registerUser(email, password).then(resp => { // Register user in Firebase Auth
       this.currUser.uid = resp.user.uid;
       this.userService.uid = resp.user.uid;
+      console.log(1);
       this.userService.getUsers().once('value', snap => { // Get users
         let array = snap.val();
         if ( array === null) {
           array = [];
         }
-        this.currUser.imageURL = this.imageURL;
-        this.userService.addImage(this.currUser.imageURL, this.image).on('state_changed',
+        const path = this.currUser.uid + '/profile';
+        this.userService.addImage(path, this.image).on('state_changed',
           snapshot => { console.log(snapshot)},
           error => { console.log(error); },
           () => {
-            array.push(this.currUser);
-            this.userService.updateDB(array).then(() => {
-              toast('User added succesfully!', 1000);
-              this.router.navigate(['dashboard']);
-            }); // Add user to database
+            console.log(3);
+            this.userService.getImage(path).getDownloadURL().then( (resp) => {
+              this.currUser.imageURL = resp;
+              array.push(this.currUser);
+              this.userService.updateDB(array).then(() => {
+                console.log(3);
+                toast('User added succesfully!', 1000);
+                this.router.navigate(['dashboard']);
+              }).catch(error => console.log(error)); // Add user to database
+            });
           });
       });
     }).catch(error => this.error = error);
@@ -90,10 +96,10 @@ export class RegisterComponent implements OnInit {
 
   onFileChanged(event) { // Gets profile image
     if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
+      let reader = new FileReader();
 
-      reader.onload = (event2: ProgressEvent) => {
-        this.imageURL = (<FileReader>event2.target).result;
+      reader.onload = (event: ProgressEvent) => {
+        this.imageURL = (<FileReader>event.target).result;
       };
 
       reader.readAsDataURL(event.target.files[0]);

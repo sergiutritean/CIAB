@@ -35,12 +35,16 @@ export class UserService {
   logout() {
     this.token = null;
     firebase.auth().signOut();
-    this.token = null;
+    this.uid = null;
     this.router.navigate(['/']);
   }
 
   isAuthenticated() {
     return this.token != null;
+  }
+
+  getImage(url) {
+    return firebase.storage().ref(url);
   }
 
 }

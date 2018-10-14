@@ -1,18 +1,18 @@
 <nav>
-  <div class="nav-wrapper">
+  <div class="nav-wrapper white" >
     <a id='navLogo' class='brand-logo' routerLink = "/"><img src='../../../assets/images/CIAB.svg'></a>
     <a data-activates="nav-mobile-client" class="button-collapse" materialize="sideNav"
-       [materializeParams]="[{menuWidth: 300,edge: 'left', closeOnClick: true, draggable: true}]"><i class="material-icons">menu</i>
+       [materializeParams]="[{menuWidth: 300,edge: 'left', closeOnClick: true, draggable: true}]"><i class="material-icons black-text">menu</i>
     </a>
     <ul id="nav-mobile" class="right hide-on-med-and-down" [ngSwitch]="isAuth()">
-      <li routerLinkActive = "active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="">Acasa</a></li>
-      <li routerLinkActive = "active"><a routerLink="">Categorii</a></li> <!-- Dropdown -->
-      <li routerLinkActive = "active"><a routerLink="/services">Servicii</a></li> <!-- Dropdown -->
-      <li routerLinkActive = "active" *ngIf="isAuth()"><a routerLink = "/dashboard">Dashboard</a></li>
-      <li routerLinkActive = "active" *ngIf="isAuth()"><a routerLink = "/profile">Profile</a></li>
-      <li routerLinkActive = "active" *ngIf="isAuth()"><a (click) = "logout()">Delogare</a></li>
-      <li routerLinkActive = "active" *ngIf="!isAuth()"><a routerLink="/register">Inregistrare</a></li>
-      <li routerLinkActive = "active" *ngIf="!isAuth()"><a routerLink="/login">Logare</a></li>
+      <li routerLinkActive = "active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="" class="black-text">Acasa</a></li>
+      <li routerLinkActive = "active"><a routerLink="" class="black-text">Categorii</a></li> <!-- Dropdown -->
+      <li routerLinkActive = "active"><a routerLink="/services" class="black-text">Servicii</a></li> <!-- Dropdown -->
+      <li routerLinkActive = "active" *ngIf="isAuth()"><a routerLink = "/dashboard" class="black-text">Dashboard</a></li>
+      <li routerLinkActive = "active" *ngIf="isAuth()"><a routerLink = "/profile" class="black-text">Profile</a></li>
+      <li routerLinkActive = "active" *ngIf="isAuth()"><a (click) = "logout()" class="black-text">Delogare</a></li>
+      <li routerLinkActive = "active" *ngIf="!isAuth()"><a routerLink="/register" class="black-text">Inregistrare</a></li>
+      <li routerLinkActive = "active" *ngIf="!isAuth()"><a routerLink="/login" class="black-text">Logare</a></li>
     </ul>
   </div>
 </nav>

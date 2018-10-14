@@ -38,15 +38,18 @@ export class AllServicesComponent implements OnInit {
 
     //title
     if(title) {
+      console.log('title');
       this.servicesToShow = this.servicesToShow.filter( service => {
-        return service.title.search(title) === 0;
+        const s1 = service.title.toLowerCase();
+        const s2 = title.toLowerCase();
+        return s1.search(s2) === 0;
       });
     }
 
     //service_type
-    if(service_type) {
+    if(service_type.offer ^ service_type.request) {
       this.servicesToShow = this.servicesToShow.filter( service => {
-        return service.service_type === service_type;
+        return service.isOffer === (service_type.offer===true? 'offer':'request');
       });
     }
 
@@ -68,9 +71,12 @@ export class AllServicesComponent implements OnInit {
     }
 
     //barter
-    this.servicesToShow = this.servicesToShow.filter( service => {
-      return service.barter === barter;
-    });
+    if(barter){
+      console.log('barter');
+      this.servicesToShow = this.servicesToShow.filter( service => {
+        return service.barter === barter;
+      });
+    }
     console.log(this.servicesToShow);
   }
 
