@@ -1,4 +1,4 @@
 <app-offer *ngFor="let item of services | paginate: { itemsPerPage: 4, currentPage: p }" [service]="item"></app-offer>
 <div class="valign-wrapper">
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+	<pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

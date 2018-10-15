@@ -1,7 +1,14 @@
-.pagination {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
+$roboto-font-path: "~materialize-css/dist/fonts/roboto/";
+@import "~materialize-css/sass/materialize";
+
+.ngx-pagination {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+
+	li.current {
+		background: $secondary-color;
+	}
 }
