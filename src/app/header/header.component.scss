@@ -6,6 +6,11 @@
 #navLogo {
 	//position: inherit;
 }
-nav ul li.active {
+nav ul li.active,
+ul.side-nav li.active {
+	/*
 	background-color: rgba(255, 255, 255, 0.1);
+	*/
+	background-color: initial;
+	font-weight: bold;
 }
