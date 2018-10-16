@@ -47,4 +47,9 @@ export class UserService {
     return firebase.storage().ref(url);
   }
 
+  getCategories() {
+    return firebase.database().ref('categories');
+  }
+
+
 }

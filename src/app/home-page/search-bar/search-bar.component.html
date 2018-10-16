@@ -5,25 +5,21 @@
       </button>
     </div>
     <form id="homeSearch" class="col s10" action="">
-      <input type="text" placeholder="Caută servicii">
+      <div class="input-field">
+        <input type="text" id="autocomplete-input" class="autocomplete" materialize="autocomplete" [materializeParams]="dataToAdd">
+        <label for="autocomplete-input">Caută servicii</label>
+      </div>
     </form>
   </div>
   <div class="row">
-    <ul class="collapsible">
+    <ul class="collapsible" materialize="collapsible">
       <li>
         <div class="collapsible-header center-align"><b>Categorii</b></div>
         <div class="collapsible-body">
           <div id="homeCategories" >
-            <div class="category"><a href="#">Categorie</a></div>
-            <div class="category"><a href="#">Categorie</a></div>
-            <div class="category"><a href="#">Categorie</a></div>
-            <div class="category"><a href="#">Categorie</a></div>
-            <div class="category"><a href="#">Categorie</a></div>
-            <div class="category"><a href="#">Categorie</a></div>
-            <div class="category"><a href="#">Categorie</a></div>
-            <div class="category"><a href="#">Categorie</a></div>
-            <div class="category"><a href="#">Categorie</a></div>
-            <div class="category"><a href="#">Categorie</a></div>
+            <div class="category" *ngFor="let category of categories">
+              <a routerLink="">{{category}}</a>
+            </div>
           </div>
         </div>
       </li>

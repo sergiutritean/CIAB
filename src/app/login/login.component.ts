@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { toast } from 'angular2-materialize';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-login',
@@ -37,5 +38,35 @@ export class LoginComponent implements OnInit {
       });
     }).catch(error => this.error = error);
   }
+
+  /*addCat() {
+    const toAdd = [
+      'IT',
+      'Reparații',
+      'Print, imprimerie și copiere',
+      'Auto / Moto',
+      'Agro',
+      'Producție',
+      'Construcții',
+      'Mobilier si tâmplărie',
+      'Croitorie, cizmărie și marochinărie',
+      'Intermediere servicii, curierat, transport și livrări',
+      'Depozitare',
+      'Educatie, formare profesionala',
+      'Artă',
+      'Casă si grădină',
+      'Cosmetică și relaxare',
+      'Modă și frumusețe',
+      'Organizari evenimente',
+      'Imobiliare',
+      'Consultanță și contabilitate',
+      'Afaceri, echipamente firme',
+      'Finante și asigurări',
+      'Locuri de muncă',
+      'Îngrijire animale',
+      'Îngrijire copii si bătrâni'];
+    firebase.database().ref('categories').set(toAdd)
+      .then( () => console.log('Categories added!'));
+  }*/
 
 }
