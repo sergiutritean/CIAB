@@ -25,6 +25,9 @@
             "styles": [
               //"node_modules/materialize-css/dist/css/materialize.css",
               //"./node_modules/materialize-css/dist/sass/materialize.scss",
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
               "src/styles.scss"
             ],
             "scripts": [

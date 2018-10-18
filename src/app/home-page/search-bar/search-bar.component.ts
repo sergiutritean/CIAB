@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ServiceService } from 'src/app/shared/services/service.service';
 import { text } from '@angular/core/src/render3/instructions';
+import { ServiceModel } from 'src/app/shared/service.model';
 
 @Component({
   selector: 'app-search-bar',
@@ -12,8 +13,12 @@ import { text } from '@angular/core/src/render3/instructions';
 export class SearchBarComponent implements OnInit {
 
   categories = [];
+  servicesBrute = [];
   services = [];
   dataToAdd = [];
+  serviceSearched: any;
+  suggestions: any[];
+  ok: boolean = false;
 
   constructor(private userService: UserService,
               private serviceService: ServiceService) { }
@@ -24,19 +29,21 @@ export class SearchBarComponent implements OnInit {
       console.log(this.categories);
     });
     this.serviceService.getServices().on('value', snap => {
-      this.services = snap.val();
+      this.servicesBrute = snap.val();
+      for(let key in this.servicesBrute) for(let key2 in this.servicesBrute[key])
+        for(let service of this.servicesBrute[key][key2])
+          this.services.push(service);
+      this.ok = true;
     });
-    let textToAdd = {};
-    for(let key in this.services){
-      for(let key2 in this.services[key]){
-        for(let service of this.services[key][key2]){
-          console.log(service);
-          textToAdd[service.title] = service.imagePath[0];
-          console.log(service.imagePath);
-        }
-      }
-    }
-    this.dataToAdd.push({'data': textToAdd});
+
+  }
+
+  filterServices(event) {
+    this.suggestions = this.services.filter( service => {
+      const s1 = service.title.toLowerCase();
+      const s2 = event.query.toLowerCase();
+      return s1.search(s2) === 0;
+    });
   }
 
 }

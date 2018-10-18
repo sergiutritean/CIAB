@@ -17,8 +17,6 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-//import { ReviewsComponent } from './profile/reviews/reviews.component';
-//import { ReviewComponent } from './profile/reviews/review/review.component';
 import { ReviewsComponent } from './service/reviews/reviews.component';
 import { ReviewComponent } from './service/reviews/review/review.component';
 import { FilterComponent} from 'src/app/all-services/filter/filter.component';
@@ -34,6 +32,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserAuthGuardService } from 'src/app/shared/services/user-auth-guard.service';
 
 import {NgxPaginationModule} from 'ngx-pagination';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
@@ -83,7 +83,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AutoCompleteModule,
+    BrowserAnimationsModule
   ],
   providers: [
     UserAuthGuardService
