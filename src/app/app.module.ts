@@ -45,6 +45,7 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'services', children: [
     { path: '', component: AllServicesComponent, pathMatch: 'full'},
+    { path: ':category', component: AllServicesComponent, pathMatch: 'full'},
     { path: ':id', component: ServiceComponent}
   ]},
   { path: 'support', component: SupportComponent},

@@ -17,13 +17,16 @@ export class AddServiceComponent implements OnInit {
   imagesURL: Array<any>;
   serviceToAdd: any;
   uid: string;
+  categories: string[];
+  categoriesToShow: string[];
 
   form = new FormGroup({
     service_type: new FormControl('', [Validators.required]),
     title: new FormControl('', [Validators.required]),
     desc: new FormControl('', [Validators.required]),
     barter: new FormControl(''),
-    price: new FormControl('', [Validators.required])
+    price: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required])
   });
 
   constructor(private serviceService: ServiceService,
@@ -33,6 +36,9 @@ export class AddServiceComponent implements OnInit {
   ngOnInit() {
     this.images = [];
     this.imagesURL = [];
+    this.userService.getCategories().on('value', snap  => {
+      this.categories = snap.val();
+    });
   }
 
   addImages(index: number) {
@@ -105,7 +111,6 @@ export class AddServiceComponent implements OnInit {
         this.images.push(files[i]);
       }
     }
-
   }
 
 }

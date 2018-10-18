@@ -15,8 +15,7 @@ export class SearchBarComponent implements OnInit {
   categories = [];
   servicesBrute = [];
   services = [];
-  dataToAdd = [];
-  serviceSearched: any;
+  serviceSearchedTitle = 'Cauta servicii';
   suggestions: any[];
   ok: boolean = false;
 
@@ -45,5 +44,10 @@ export class SearchBarComponent implements OnInit {
       return s1.search(s2) === 0;
     });
   }
+
+  setTitle(title){
+    this.serviceSearchedTitle = title;
+  }
+
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ServiceService } from 'src/app/shared/services/service.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-all-services',
@@ -11,9 +12,12 @@ export class AllServicesComponent implements OnInit {
 
   services = [];
   servicesToShow = [];
+  hasCategory: boolean = false;
+  category: string = '';
 
   constructor(private userService: UserService,
-              private serviceService: ServiceService) { }
+              private serviceService: ServiceService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.serviceService.getServices().on('value',snap => {
@@ -22,7 +26,15 @@ export class AllServicesComponent implements OnInit {
 
       this.services = this.services.filter( service => service.fromUser !== this.userService.uid);
       this.servicesToShow = this.services.slice();
-      console.log(this.services);
+      this.activatedRoute.params.subscribe( (params: Params) => {
+        if(params['category']){
+          this.hasCategory = true;
+          this.category = params['category'];
+          this.filter({
+            'category': this.category
+          });
+        }
+      });
     });
   }
 
@@ -35,10 +47,10 @@ export class AllServicesComponent implements OnInit {
     const all_categories = event.all;
     const price = event.price;
     const barter = event.barter;
+    const category = event.category;
 
     //title
     if(title) {
-      console.log('title');
       this.servicesToShow = this.servicesToShow.filter( service => {
         const s1 = service.title.toLowerCase();
         const s2 = title.toLowerCase();
@@ -47,24 +59,27 @@ export class AllServicesComponent implements OnInit {
     }
 
     //service_type
-    if(service_type.offer ^ service_type.request) {
+    if(service_type && service_type.offer ^ service_type.request) {
       this.servicesToShow = this.servicesToShow.filter( service => {
         return service.isOffer === (service_type.offer===true? 'offer':'request');
       });
     }
 
     //all_categories
+    if(!all_categories && category){
+      this.servicesToShow = this.servicesToShow.filter( service => {
+        return service.category === category;
+      });
+    }
     /* TODO: To add categories*/
 
     //price
-    if(price.max) {
-      console.log("MAX"+price.max);
+    if(price && price.max) {
       this.servicesToShow = this.servicesToShow.filter( service => {
         return service.price <= price.max;
       });
     }
-    if(price.min) {
-      console.log("MIN"+price.min);
+    if(price && price.min) {
       this.servicesToShow = this.servicesToShow.filter( service => {
         return service.price >= price.min;
       });
@@ -72,7 +87,6 @@ export class AllServicesComponent implements OnInit {
 
     //barter
     if(barter){
-      console.log('barter');
       this.servicesToShow = this.servicesToShow.filter( service => {
         return service.barter === barter;
       });

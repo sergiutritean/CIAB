@@ -27,10 +27,10 @@
           </div>
 
 					<div class="input-field col s12" materialize>
-						<select materialize="material_select" [materializeSelectOptions]="categories">
+						<select materialize="material_select" [materializeSelectOptions]="categories" formControlName="category">
 							<option value="" disabled selected>Alegeți categoria</option>
-							<option *ngFor="let category of categories" [value]="option.value">
-								{{ category.name }}
+							<option *ngFor="let category of categories" [value]="category">
+								{{ category }}
 							</option>
 						</select>
 						<label>Categorie</label>

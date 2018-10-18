@@ -25,6 +25,13 @@
 					<input name="all" type="checkbox" id="all" [value]="false" formControlName="all" checked="checked"/>
 					<label for="all">Toate</label>
 				</p>
+        <div>
+          <p-autoComplete formControlName="category"
+                          [suggestions]="categoriesToShow"
+                          (completeMethod)="search($event)"
+                          [disabled]="this.form.get('all').value"
+          ></p-autoComplete>
+        </div>
 			</fieldset>
 		</div>
 

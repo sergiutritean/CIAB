@@ -8,15 +8,14 @@
 			<form id="homeSearch" class="ui-fluid" action="">
 				<p-autoComplete
 					placeholder="Cauta servicii"
-					[(ngModel)]="serviceSearched"
+					[(ngModel)]="serviceSearchedTitle"
 					[suggestions]="suggestions"
 					(completeMethod)="filterServices($event)"
 					[minLength]="1"
-					[dropdown]="true"
 					[ngModelOptions]="{standalone: true}"
 					[disabled] = "!ok">
 					<ng-template let-serv pTemplate="item">
-						<div class="ui-helper-clearfix acItem">
+						<div class="ui-helper-clearfix acItem" [routerLink]="'/services/'+serv.uid" (click)="setTitle(serv.title)">
 							<img [src]="serv.imagePath[0]"/>
 							<div>{{ serv.title }}</div>
 							<div class="rating medium star-icon value-{{ serv.rating-1  | number: 0 }} half label-left">
@@ -62,7 +61,7 @@
         <div class="collapsible-body">
           <div id="homeCategories" >
             <div class="category" *ngFor="let category of categories">
-              <a routerLink="">{{category}}</a>
+              <a [routerLink]="'/services/' + category">{{category}}</a>
             </div>
           </div>
         </div>
