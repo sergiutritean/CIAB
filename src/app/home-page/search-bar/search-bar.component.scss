@@ -6,3 +6,31 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 }
+#newServ {
+}
+form {
+	width: 100%;
+	.acItem {
+		display: flex;
+    justify-content: flex-start;
+    align-content: center;
+		align-items: center;
+
+		img {
+			width: 2rem;
+			height: 2rem;
+			object-fit: cover;
+		}
+		div {
+			font-size: 1.4rem;
+			margin-left: .5rem;
+		}
+		.rating {
+			flex: 1;
+			display: flex;
+			justify-content: flex-end;
+			align-content: center;
+			align-items: center;
+		}
+	}
+}
