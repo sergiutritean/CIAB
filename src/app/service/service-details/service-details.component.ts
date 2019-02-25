@@ -9,10 +9,22 @@ import { ServiceModel } from 'src/app/shared/service.model';
 export class ServiceDetailsComponent implements OnInit {
   @Input() service: ServiceModel;
 
-  constructor() { }
+  amount: number = 0;
+  label: string = '';
+  isOpen: boolean = false;
+
+  constructor() {
+
+  }
 
   ngOnInit() {
     console.log(this.service);
+    this.amount = this.service.price;
+    this.label = this.service.title;
+  }
+
+  openPayment() {
+    this.isOpen = true;
   }
 
 }

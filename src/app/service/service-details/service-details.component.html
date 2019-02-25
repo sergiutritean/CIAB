@@ -57,7 +57,9 @@
       <p id="servicePrice">{{ service.price }}</p>
       <div id="serviceBuyButton">
         <form action="">
-          <button class="waves-effect waves-light btn-large" type="submit">Cumpără</button>
+          <button class="waves-effect waves-light btn-large"
+                  type="submit"
+                  (click)="openPayment()">Cumpără</button>
         </form>
       </div>
     </div>
@@ -69,3 +71,6 @@
 		<p id="serviceDescription">{{ service.desc }}</p>
 	</div>
 </div>
+<app-payment-service *ngIf="isOpen"
+                     [amount]="amount"
+                     [label]="label"></app-payment-service>

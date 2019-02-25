@@ -26,6 +26,7 @@ import { OfferComponent } from 'src/app/all-services/all-offers/offer/offer.comp
 import { ServiceDetailsComponent } from './service/service-details/service-details.component';
 import { SupportComponent } from './support/support.component';
 import { FooterComponent } from './footer/footer.component';
+import { PaymentServiceComponent } from 'src/app/service/payment-service/payment-service.component';
 
 import { StarRatingModule } from 'angular-star-rating';
 import { RouterModule, Routes } from '@angular/router';
@@ -34,6 +35,7 @@ import { UserAuthGuardService } from 'src/app/shared/services/user-auth-guard.se
 import {NgxPaginationModule} from 'ngx-pagination';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaymentService } from 'src/app/shared/services/payment.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
@@ -45,7 +47,9 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'services', children: [
     { path: '', component: AllServicesComponent, pathMatch: 'full'},
-    { path: ':category', component: AllServicesComponent, pathMatch: 'full'},
+    { path: ':category', component: AllServicesComponent, pathMatch: 'full'}
+  ]},
+  { path: 'service', children: [
     { path: ':id', component: ServiceComponent}
   ]},
   { path: 'support', component: SupportComponent},
@@ -75,7 +79,8 @@ const appRoutes: Routes = [
     SupportComponent,
     FooterComponent,
     AllServicesComponent,
-    ServiceComponent
+    ServiceComponent,
+    PaymentServiceComponent
   ],
   imports: [
     MaterializeModule,
@@ -89,7 +94,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule
   ],
   providers: [
-    UserAuthGuardService
+    UserAuthGuardService,
+    PaymentService
   ],
   bootstrap: [AppComponent]
 })
