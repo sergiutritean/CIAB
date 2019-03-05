@@ -18,6 +18,7 @@ export class SearchBarComponent implements OnInit {
   serviceSearchedTitle = 'Cauta servicii';
   suggestions: any[];
   ok: boolean = false;
+  modified: any = 0;
 
   constructor(private userService: UserService,
               private serviceService: ServiceService) { }
@@ -38,16 +39,21 @@ export class SearchBarComponent implements OnInit {
   }
 
   filterServices(event) {
+    this.modified = 0;
     this.suggestions = this.services.filter( service => {
       const s1 = service.title.toLowerCase();
       const s2 = event.query.toLowerCase();
       return s1.search(s2) === 0;
     });
+    console.log(this.suggestions);
   }
 
   setTitle(title){
     this.serviceSearchedTitle = title;
   }
 
-
+  canShow() {
+    this.modified ++;
+    return this.modified==1;
+  }
 }

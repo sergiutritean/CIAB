@@ -7,50 +7,24 @@
 		<div class="valign-wrapper col s10">
 			<form id="homeSearch" class="ui-fluid" action="">
 				<p-autoComplete
-					placeholder="Cauta servicii"
 					[(ngModel)]="serviceSearchedTitle"
 					[suggestions]="suggestions"
 					(completeMethod)="filterServices($event)"
 					[minLength]="1"
 					[ngModelOptions]="{standalone: true}"
 					[disabled] = "!ok">
-					<ng-template let-serv pTemplate="item">
-						<div class="ui-helper-clearfix acItem" [routerLink]="'../service/'+serv.uid" (click)="setTitle(serv.title)">
-							<img [src]="serv.imagePath[0]"/>
-							<div>{{ serv.title }}</div>
-							<div class="rating medium star-icon value-{{ serv.rating-1  | number: 0 }} half label-left">
-								<!--<div class="label-value">{{ serv.rating }}</div>-->
-								<div class="star-container">
-									<div class="star">
-										<i class="star-empty"></i>
-										<i class="star-half"></i>
-										<i class="star-filled"></i>
-									</div>
-									<div class="star">
-										<i class="star-empty"></i>
-										<i class="star-half"></i>
-										<i class="star-filled"></i>
-									</div>
-									<div class="star">
-										<i class="star-empty"></i>
-										<i class="star-half"></i>
-										<i class="star-filled"></i>
-									</div>
-									<div class="star">
-										<i class="star-empty"></i>
-										<i class="star-half"></i>
-										<i class="star-filled"></i>
-									</div>
-									<div class="star">
-										<i class="star-empty"></i>
-										<i class="star-half"></i>
-										<i class="star-filled"></i>
-									</div>
-								</div>
-							</div>
-						</div>
+					<ng-template pTemplate="item">
+            <div *ngFor="let serv of suggestions">
+              <div class="ui-helper-clearfix acItem" [routerLink]="'../service/'+serv.uid" (click)="setTitle(serv.title)">
+                <img [src]="serv.imagePath[0]"/>
+                <div>{{ serv.title }}</div>
+                <div class="rating half label-left">
+                  <star-rating [starType]="'svg'" [rating]="serv.rating"></star-rating>
+                </div>
+              </div>
+            </div>
 					</ng-template>
-				</p-autoComplete>
+        </p-autoComplete>
 			</form>
 		</div>
   </div>
