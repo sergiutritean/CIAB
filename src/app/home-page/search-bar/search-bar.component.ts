@@ -15,7 +15,7 @@ export class SearchBarComponent implements OnInit {
   categories = [];
   servicesBrute = [];
   services = [];
-  serviceSearchedTitle = 'Cauta servicii';
+  serviceSearchedTitle = '';
   suggestions: any[];
   ok: boolean = false;
   modified: any = 0;

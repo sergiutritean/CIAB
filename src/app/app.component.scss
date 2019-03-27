@@ -8,4 +8,13 @@ $roboto-font-path: "~materialize-css/dist/fonts/roboto/";
 
 main {
   min-height: calc(100vh - #{$navbar-height});
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    padding-top: 2.5rem;
+  }
 }

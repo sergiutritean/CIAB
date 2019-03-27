@@ -2,9 +2,13 @@
 	text-align: center;
 	//font-size: 1.5rem;
 }
-#homeCategories {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+.collapsible-body {
+	background-color: rgb(255, 229, 183);
+
+	#homeCategories {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
 }
 #newServ {
 }
@@ -33,4 +37,16 @@ form {
 			align-items: center;
 		}
 	}
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+	border-bottom: 1px solid #feb872;
+	box-shadow: 0 1px 0 0 #feb872;
+}
+.category a {
+	color: #000;
+}
+.category a:hover {
+	color: inherit;
+	text-decoration: underline;
 }

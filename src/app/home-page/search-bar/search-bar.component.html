@@ -7,7 +7,8 @@
 		<div class="valign-wrapper col s10">
 			<form id="homeSearch" class="ui-fluid" action="">
 				<p-autoComplete
-					[(ngModel)]="serviceSearchedTitle"
+          [(ngModel)]="serviceSearchedTitle"
+          placeholder="Search services"
 					[suggestions]="suggestions"
 					(completeMethod)="filterServices($event)"
 					[minLength]="1"

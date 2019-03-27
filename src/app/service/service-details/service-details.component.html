@@ -22,9 +22,16 @@
     </div>
     <div id="serviceData2" class="">
       <div class="rating half label-left">
-        <star-rating [starType]="'svg'" [rating]="service.rating"></star-rating>
+        <star-rating
+        [starType]="'svg'"
+        [rating]="service.rating"
+        [readOnly]="true"></star-rating>
+        <!--[hoverEnabled]="true"-->
       </div>
-      <p id="servicePrice">{{ service.price }}</p>
+      <div class="payment">
+        <p id="servicePrice">{{ service.price }}</p>
+        <div id="paypal-button"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -34,4 +41,3 @@
 		<p id="serviceDescription">{{ service.desc }}</p>
 	</div>
 </div>
-<div id="paypal-button"></div>

@@ -1,8 +1,24 @@
+:host {
+	margin-top: -2.5rem;
+}
+
+.row:first-child .col.s12 {
+	background:
+		linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.75)),
+		url('../../assets/images/hs.jpg');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 50vh;
+	width: 100vw;
+	padding: 5rem;
+}
+
 #browseButtons {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-around;
 	align-content: center;
 	align-items: center;
 
@@ -15,6 +31,15 @@
 		width:  14rem;
 		height: 14rem;
 		margin: 1rem;
+
+		&:nth-child(1) {
+			color: #FFFFFF;
+			background: linear-gradient(135deg,#FFE2C6 , #CC8C4D);
+		}
+		&:nth-child(2) {
+			color: #FFFFFF;
+			background: linear-gradient(135deg,#63C5E3 , #2C92B1);
+		}
 
 		a {
 			display: flex;

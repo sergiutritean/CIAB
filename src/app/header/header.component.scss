@@ -5,6 +5,7 @@
 }
 #navLogo {
 	//position: inherit;
+	position: initial;
 }
 nav ul li.active,
 ul.side-nav li.active {
@@ -13,4 +14,30 @@ ul.side-nav li.active {
 	*/
 	background-color: initial;
 	font-weight: bold;
+}
+
+nav	ul li a {
+	font-size: 1.1rem;
+}
+nav,
+nav .nav-wrapper i,
+nav a.button-collapse,
+nav a.button-collapse i {
+	height: 85px;
+	line-height: 85px;
+}
+
+.nav-wrapper {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+@media only screen and (max-width: 992px) {
+	.nav-wrapper {
+		display: inherit;
+	}
+	#navLogo {
+		position: absolute;
+	}
 }
