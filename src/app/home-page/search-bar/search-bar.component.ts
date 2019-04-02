@@ -43,9 +43,9 @@ export class SearchBarComponent implements OnInit {
     this.suggestions = this.services.filter( service => {
       const s1 = service.title.toLowerCase();
       const s2 = event.query.toLowerCase();
-      return s1.search(s2) === 0;
+      return s1.search(s2) === 0 && service.status === 'my_service';
     });
-    console.log(this.suggestions);
+    console.log(...this.suggestions);
   }
 
   setTitle(title){

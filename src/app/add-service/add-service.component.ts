@@ -49,7 +49,7 @@ export class AddServiceComponent implements OnInit {
         this.form.value.title,
         this.form.value.desc,
         0,
-        '',
+        this.form.value.category,
         this.imagesURL,
         this.userService.uid,
         this.uid,
@@ -83,6 +83,7 @@ export class AddServiceComponent implements OnInit {
         const text = this.form.value.service_type;
         if(!users[index][text]) users[index][text] = [];
         users[index][text].push(this.uid);
+        console.log(this.serviceToAdd);
         this.userService.updateDB(users).then( () => {
           this.serviceService.addService(this.serviceToAdd).then( () => {
             this.form.reset();

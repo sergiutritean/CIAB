@@ -14,14 +14,12 @@
 					[minLength]="1"
 					[ngModelOptions]="{standalone: true}"
 					[disabled] = "!ok">
-					<ng-template pTemplate="item">
-            <div *ngFor="let serv of suggestions">
-              <div class="ui-helper-clearfix acItem" [routerLink]="'../service/'+serv.uid" (click)="setTitle(serv.title)">
-                <img [src]="serv.imagePath[0]"/>
-                <div>{{ serv.title }}</div>
-                <div class="rating half label-left">
-                  <star-rating [starType]="'svg'" [rating]="serv.rating"></star-rating>
-                </div>
+					<ng-template pTemplate="item" let-serv>
+            <div class="ui-helper-clearfix acItem" [routerLink]="'../service/'+serv.uid" (click)="setTitle(serv.title)">
+              <img [src]="serv.imagePath[0]"/>
+              <div>{{ serv.title }}</div>
+              <div class="rating half label-left">
+                <star-rating [starType]="'svg'" [rating]="serv.rating"></star-rating>
               </div>
             </div>
 					</ng-template>
