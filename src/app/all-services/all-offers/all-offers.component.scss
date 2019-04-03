@@ -1,6 +1,13 @@
 $roboto-font-path: "~materialize-css/dist/fonts/roboto/";
 @import "~materialize-css/sass/materialize";
 
+/deep/ .ngx-pagination .ng-star-inserted.current {
+	background-color: #CC8C4D;
+}
+/deep/ .ngx-pagination .ng-star-inserted:not(.current):hover {
+	color: #CC8C4D;
+}
+
 .ngx-pagination {
 	display: flex;
 	flex-direction: row;
