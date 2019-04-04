@@ -27,12 +27,20 @@
 }
 
 #serviceInfo {
+	min-height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: flex-start;
 	#serviceData1 {
 		#serviceBarter {
 			font-weight: bold;
 		}
 	}
 	#serviceData2 {
+		.rating {
+			justify-content: flex-start;
+		}
 		.payment {
 			display: flex;
 			justify-content: space-around;

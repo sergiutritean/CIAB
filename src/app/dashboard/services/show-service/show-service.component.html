@@ -8,7 +8,7 @@
     <p class="serviceRating"><span class="amber-text text-darken-1">★</span>{{ service.rating }}</p>
   </div>
   <div class="col s3 serviceData2">
-    <p class="servicePrice">{{ service.price }}</p>
+    <p class="servicePrice">{{ service.price }} EUR</p>
     <div *ngIf="service.barter" style="flex: 1;"></div>
     <div *ngIf="!service.barter" style="flex: 2;"></div>
     <p *ngIf="service.barter" class="serviceBarter green white-text"> ✓ Barter</p>
