@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { ServiceModel } from 'src/app/shared/service.model';
+import { UserService } from 'src/app/shared/services/user.service';
+import {toast} from "angular2-materialize";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
 
-  constructor() { }
+  constructor( private userService: UserService) { }
 
   getUniqueID() {
     return '_' + Math.random().toString(36).substr(2, 9);
   }
 
-  addService(service: ServiceModel) {
-    const url = 'services/' + service.fromUser + '/' + service.uid;
+  addService(service: ServiceModel, where: string) {
+    const url = 'services/' + where + '/' + service.uid;
     let services = [];
     firebase.database().ref(url).once( 'value', snap => {
       services = snap.val();
@@ -31,6 +33,13 @@ export class ServiceService {
   getServices(...args) {
     if(args) return firebase.database().ref('services/'+args);
     return firebase.database().ref('services');
+  }
+
+  whenBuy(service: ServiceModel) {
+    this.addService(service, this.userService.uid);
+    service.status = 'progress';
+    this.addService(service, service.fromUser);
+    toast('Service purchased succesfully!', 2000);
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { ServiceModel } from 'src/app/shared/service.model';
-
+import { UserService } from 'src/app/shared/services/user.service';
+import {toast} from "angular2-materialize";
+import {ServiceService} from "../../shared/services/service.service";
 declare let paypal: any;
 
 @Component({
@@ -15,7 +17,7 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
   label: string = '';
   isOpen: boolean = false;
 
-  constructor() {
+  constructor(private userService: UserService, private serviceService: ServiceService) {
 
   }
 
@@ -23,6 +25,10 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
     console.log(this.service);
     this.amount = this.service.price;
     this.label = this.service.title;
+  }
+
+  isAuth() {
+    return this.userService.isAuthenticated();
   }
 
   ngAfterViewInit(): void {
@@ -35,6 +41,12 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
           sandbox: 'Ae_nW2sZxXiUHhvEVgmpKJDH6PLk7QdVmRHszElpCPqghzJVDdYqi8B0em3jx7LFHPv2wHBlPQKj1wXN'
         },
         commit: true,
+        style: {
+          size: 'responsive',
+          color: 'black',
+          shape: 'rect',
+          layout: 'vertical'
+        },
         payment: function (data, actions) {
           return actions.payment.create({
             payment: {
@@ -46,13 +58,16 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
             }
           })
         },
-        onAuthorize: function(data, actions) {
-          return actions.payment.execute().then(function(payment) {
-            // TODO
+        onAuthorize: (data, actions) => {
+          return actions.payment.execute().then( (payment) => {
+            let serviceToAdd = this.service;
+            serviceToAdd.status = 'waiting';
+            this.serviceService.whenBuy(serviceToAdd);
+            toast('Service bought succesfully!', 2000);
           })
         }
       }, '#paypal-button');
-  });
+    });
   }
 
   private loadExternalScript(scriptUrl: string) {
@@ -60,8 +75,8 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
       const scriptElement = document.createElement('script');
       scriptElement.src = scriptUrl;
       scriptElement.onload = resolve;
-      document.body.appendChild(scriptElement)
+      document.body.appendChild(scriptElement);
+
     })
   }
-
 }

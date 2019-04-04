@@ -30,7 +30,12 @@
       </div>
       <div class="payment">
         <p id="servicePrice">{{ service.price }} EUR</p>
-        <div id="paypal-button"></div>
+        <div id="paypal-button" *ngIf="isAuth()"></div>
+        <div class="tooltipped" materialize="tooltip"  data-position="bottom" data-tooltip="You have to login to purchase this service">
+          <a *ngIf="!isAuth()" class = "btn-large disabled" >
+           Buy
+          </a>
+        </div>
       </div>
     </div>
   </div>

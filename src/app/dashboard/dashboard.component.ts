@@ -36,6 +36,7 @@ export class DashboardComponent implements OnInit {
       this.my_services = this.services.filter( service => service.status === 'available');
       this.services_done = this.services.filter( service => service.status === 'done');
       this.services_waiting = this.services.filter( service => service.status === 'waiting');
+      this.services_progress = this.services.filter( service => service.status === 'progress');
       this.servicesToPass = this.services;
     });
   }

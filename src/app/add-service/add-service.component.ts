@@ -85,7 +85,7 @@ export class AddServiceComponent implements OnInit {
         users[index][text].push(this.uid);
         console.log(this.serviceToAdd);
         this.userService.updateDB(users).then( () => {
-          this.serviceService.addService(this.serviceToAdd).then( () => {
+          this.serviceService.addService(this.serviceToAdd, this.serviceToAdd.fromUser).then( () => {
             this.form.reset();
             toast('Service added succesfully!', 1000);
             this.router.navigate(['dashboard']);
