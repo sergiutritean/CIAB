@@ -44,7 +44,10 @@ const appRoutes: Routes = [
   { path: 'feedback', component: FeedbackComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile', children: [
+    { path: '', component: ProfileComponent, pathMatch: 'full'},
+    { path: ':uid', component: ProfileComponent, pathMatch: 'full'}
+  ]},
   { path: 'services', children: [
     { path: '', component: AllServicesComponent, pathMatch: 'full'},
     { path: ':category', component: AllServicesComponent, pathMatch: 'full'}

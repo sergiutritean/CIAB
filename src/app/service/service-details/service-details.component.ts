@@ -3,6 +3,7 @@ import { ServiceModel } from 'src/app/shared/service.model';
 import { UserService } from 'src/app/shared/services/user.service';
 import {toast} from "angular2-materialize";
 import {ServiceService} from "../../shared/services/service.service";
+import { User } from 'firebase';
 declare let paypal: any;
 
 @Component({
@@ -21,10 +22,16 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
 
   }
 
+  author: User;
+
   ngOnInit() {
     console.log(this.service);
     this.amount = this.service.price;
     this.label = this.service.title;
+
+    this.userService.getUsers().on('value', snap => {
+      this.author = snap.val().filter( user => user.uid === this.service.fromUser)[0];
+    })
   }
 
   isAuth() {
