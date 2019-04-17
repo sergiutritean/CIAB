@@ -1,10 +1,10 @@
 <div class="row valign-wrapper">
     <div id="newServ" class="col s2">
       <button routerLink='/add_service' class="waves-effect waves-light btn-large black">
-        <i class="material-icons">add</i>
+        <i class="material-icons hoverable">add</i>
       </button>
 		</div>
-		<div class="valign-wrapper col s10">
+		<div class="valign-wrapper col s10 hoverable">
 			<form id="homeSearch" class="ui-fluid" action="">
 				<p-autoComplete
           [(ngModel)]="serviceSearchedTitle"
@@ -15,11 +15,13 @@
 					[ngModelOptions]="{standalone: true}"
 					[disabled] = "!ok">
 					<ng-template pTemplate="item" let-serv>
-            <div class="ui-helper-clearfix acItem" [routerLink]="'../service/'+serv.uid" (click)="setTitle(serv.title)">
-              <img [src]="serv.imagePath[0]"/>
-              <div>{{ serv.title }}</div>
-              <div class="rating half label-left">
-                <star-rating [starType]="'svg'" [rating]="serv.rating"></star-rating>
+            <div class="hoverable">
+              <div class="ui-helper-clearfix acItem " [routerLink]="'../service/'+serv.uid" (click)="setTitle(serv.title)">
+                <img [src]="serv.imagePath[0]"/>
+                <div>{{ serv.title }}</div>
+                <div class="rating half label-left">
+                  <star-rating [starType]="'svg'" [rating]="serv.rating"></star-rating>
+                </div>
               </div>
             </div>
 					</ng-template>
@@ -27,7 +29,7 @@
 			</form>
 		</div>
   </div>
-  <div class="row">
+  <div class="row hoverable">
     <ul class="collapsible" materialize="collapsible">
       <li>
         <div class="collapsible-header center-align"><b>Categorii</b></div>

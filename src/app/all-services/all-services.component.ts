@@ -24,7 +24,7 @@ export class AllServicesComponent implements OnInit {
       for(let key in snap.val()) for(let key2 in snap.val()[key])
         this.services.push(...snap.val()[key][key2]);
 
-      this.services = this.services.filter( service => service.fromUser !== this.userService.uid);
+      this.services = this.services.filter( service => (service.fromUser !== this.userService.uid && service.status ==='my_service') );
       this.servicesToShow = this.services.slice();
       this.activatedRoute.params.subscribe( (params: Params) => {
         if(params['category']){
