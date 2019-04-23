@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import { ServiceModel } from 'src/app/shared/service.model';
+import {MaterializeAction} from "angular2-materialize";
 
 @Component({
   selector: 'app-services',
@@ -9,7 +10,7 @@ import { ServiceModel } from 'src/app/shared/service.model';
 export class ServicesComponent implements OnInit {
 
   @Input() services: ServiceModel[];
-
+  @Input() status: string;
   constructor() { }
 
   ngOnInit() {
@@ -43,5 +44,6 @@ export class ServicesComponent implements OnInit {
       )
     ];*/
   }
+
 
 }

@@ -17,5 +17,5 @@
        (click)="changeStatus('services_waiting')"
        style="cursor: pointer">Servicii în așteptare</div>
 </div>
-<app-services [services] = "servicesToPass" class="flow-text"></app-services>
+<app-services [services] = "servicesToPass" class="flow-text" [status]="status"></app-services>
 <!-- TODO: bold active texts-->

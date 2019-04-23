@@ -36,6 +36,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaymentService } from 'src/app/shared/services/payment.service';
+import { ReviewFormComponent } from './review-form/review-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
@@ -83,7 +84,8 @@ const appRoutes: Routes = [
     FooterComponent,
     AllServicesComponent,
     ServiceComponent,
-    PaymentServiceComponent
+    PaymentServiceComponent,
+    ReviewFormComponent
   ],
   imports: [
     MaterializeModule,

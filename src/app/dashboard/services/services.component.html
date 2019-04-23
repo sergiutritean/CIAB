@@ -1,3 +1,11 @@
 <app-show-service *ngFor="let service of services"
                   [service]="service"
-s></app-show-service>
+                  [status]="status"
+></app-show-service>
+<!-- Modal Trigger -->
+<!--<a (click)="openModal()">Open</a>
+
+<div id="modaltest" class="modal" materialize="modal"
+     [materializeParams]="[{dismissible: true}]" [materializeSelectOptions]="[{startingTop:'0%'}]" [materializeActions]="modalActions">
+Merge
+</div>-->

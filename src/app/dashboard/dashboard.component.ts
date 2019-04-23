@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   services_waiting = [];
   servicesToPass = [];
 
+  status = '';
+
   isActive = new Map<string, boolean>();
 
   constructor(private userService: UserService,
@@ -47,6 +49,7 @@ export class DashboardComponent implements OnInit {
     this.isActive['services_progress'] = false;
     this.isActive['services_waiting'] = false;
     this.isActive[text] = true;
+    this.status = text;
     switch(text){
       case 'services':{
         this.servicesToPass = this.services;
