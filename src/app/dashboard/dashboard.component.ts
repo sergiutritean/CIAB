@@ -30,20 +30,21 @@ export class DashboardComponent implements OnInit {
     this.isActive['services_waiting'] = false;
 
     this.serviceService.getServices().on('value',snap => {
-      for(let key in snap.val()) for(let key2 in snap.val()[key])
-        this.services.push(...snap.val()[key][key2]);
+      for(let key in snap.val()) for(let key2 in snap.val()[key]){
+        let serv = snap.val()[key][key2];
+        this.services.push(...serv.filter( service => service.fromUser === this.userService.uid || service.toUser === this.userService.uid))
+      }
 
-      console.log(this.services);
-      this.services = this.services.filter(service => service.fromUser === this.userService.uid);
-      this.my_services = this.services.filter( service => service.status === 'available');
-      this.services_done = this.services.filter( service => service.status === 'done');
-      this.services_waiting = this.services.filter( service => service.status === 'waiting');
-      this.services_progress = this.services.filter( service => service.status === 'progress');
-      this.servicesToPass = this.services;
+      this.my_services = this.services.filter( service => service.status === 'my_service' && service.fromUser === this.userService.uid);
+      this.services_done = this.services.filter( service => service.status === 'done' && service.toUser === this.userService.uid);
+      this.services_waiting = this.services.filter( service => service.status === 'waiting' && service.toUser === this.userService.uid);
+      this.services_progress = this.services.filter( service => service.status === 'processing' && service.fromUser === this.userService.uid);
+      this.servicesToPass = this.my_services;
     });
   }
 
   changeStatus(text: string) {
+    console.log(text);
     this.isActive['services'] = false;
     this.isActive['services_done'] = false;
     this.isActive['services_progress'] = false;
@@ -52,7 +53,7 @@ export class DashboardComponent implements OnInit {
     this.status = text;
     switch(text){
       case 'services':{
-        this.servicesToPass = this.services;
+        this.servicesToPass = this.my_services;
         console.log('services');
         break;
       }

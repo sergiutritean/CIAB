@@ -1,3 +1,4 @@
+<div *ngIf="service">
 <div class="row serviceItem hoverable" >
   <div class="col s3 servicePhoto" [routerLink]="'../service/' + service.uid">
     <img [src]="service.imagePath[0]" width="100%" height="100%"/>

@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { ServiceModel } from 'src/app/shared/service.model';
+import { toast } from 'angular2-materialize';
+import { ServiceService } from 'src/app/shared/services/service.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import {toast} from "angular2-materialize";
-import {ServiceService} from "../../shared/services/service.service";
 import { User } from 'firebase';
+import { UserModel } from 'src/app/shared/user.model';
+
 declare let paypal: any;
 
 @Component({
@@ -17,12 +19,13 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
   amount: number = 0;
   label: string = '';
   isOpen: boolean = false;
+  isOkay: boolean = false;
 
   constructor(private userService: UserService, private serviceService: ServiceService) {
 
   }
 
-  author: User;
+  author: UserModel;
 
   ngOnInit() {
     console.log(this.service);
@@ -36,6 +39,10 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
 
   isAuth() {
     return this.userService.isAuthenticated();
+  }
+
+  doAfterPayment() {
+    this.serviceService.whenBuyService(this.service);
   }
 
   ngAfterViewInit(): void {
@@ -69,12 +76,13 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
           return actions.payment.execute().then( (payment) => {
             let serviceToAdd = this.service;
             serviceToAdd.status = 'waiting';
-            this.serviceService.whenBuy(serviceToAdd);
+            this.serviceService.whenBuyService(serviceToAdd);
             toast('Service bought succesfully!', 2000);
           })
         }
       }, '#paypal-button');
     });
+    console.log(this.isOkay);
   }
 
   private loadExternalScript(scriptUrl: string) {
@@ -86,4 +94,5 @@ export class ServiceDetailsComponent implements OnInit,AfterViewInit {
 
     })
   }
+
 }

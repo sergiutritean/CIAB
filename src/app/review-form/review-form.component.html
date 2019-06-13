@@ -1,4 +1,47 @@
-<form [formGroup]="form">
-  <star-rating-control formControlName="myRatingControl"></star-rating-control>
-  <pre>{{ form.value | json }}</pre>
-</form>
+<div class="valign-wrapper row">
+  <div class="col card hoverable s12">
+    <form [formGroup] = 'form' (submit)="onSubmit()">
+      <div class="card-content">
+        <div class="row">
+
+          <div class="input-field col s12">
+            <label for='nsFormTitle'>Titlu</label>
+            <input type='text' id='nsFormTitle' name='title' formControlName="title" class="validate" required>
+          </div>
+
+          <div class="input-field col s12">
+            <label for='nsFormDescription'>Descriere</label>
+            <textarea class="materialize-textarea validate" id='nsFormDescription' name='description' formControlName="desc" required></textarea>
+          </div>
+
+          <div class="col s3"></div>
+          <div class="col s3">
+            <p class="flow-text">Nota: {{ form.value.rating }}</p>
+          </div>
+          <div class="col s3">
+            <star-rating-control formControlName="rating" [showHalfStars]="true" [step]="0.5" [hoverEnabled]="true" size="large"></star-rating-control>
+          </div>
+          <div class="col s3"></div>
+
+          <div class="file-field input-field col s12">
+            <div class="btn">
+              <span>Poze</span>
+              <input type="file" multiple name="photos" (change)="onChange($event)">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Upload one or more files">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-action center-align">
+          <button class="waves-effect waves-light btn-large" type="submit" [disabled]="notAuth()">Trimite review-ul</button>
+        </div>
+        <p style="color: red">{{error}}</p>
+        <p style="color: red" *ngIf="notAuth()">You have to be logged in to send a review!</p>
+      </div>
+    </form>
+  </div>
+</div>
+

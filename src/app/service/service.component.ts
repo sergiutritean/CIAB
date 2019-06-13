@@ -21,7 +21,7 @@ export class ServiceComponent implements OnInit {
       this.id = params['id'];
       this.serviceService.getServices().on('value', snap => {
         console.log(snap.val());
-        for(let key in snap.val()) if(snap.val()[key][this.id]){
+        for(let key in snap.val()) if(snap.val()[key][this.id] && snap.val()[key][this.id][0].status === 'my_service'){
           this.service = snap.val()[key][this.id][0];
           console.log(this.service);
           break;

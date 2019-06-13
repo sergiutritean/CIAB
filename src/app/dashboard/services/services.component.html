@@ -1,3 +1,6 @@
+<div *ngIf="services.length == 0">
+  <p>No {{status}} available</p>
+</div>
 <app-show-service *ngFor="let service of services"
                   [service]="service"
                   [status]="status"

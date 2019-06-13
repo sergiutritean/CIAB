@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import {ServiceService} from "./service.service";
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +52,12 @@ export class UserService {
     return firebase.database().ref('categories');
   }
 
+  convertUIDtoName(uid: string) {
+    let name = '';
+    this.getUsers().once('value', snap => {
+      name = snap.val().filter(user => user.uid === uid)[0].name;
+    });
+    return name;
+  }
 
 }

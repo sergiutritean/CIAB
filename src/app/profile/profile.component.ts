@@ -3,7 +3,7 @@ import { UserModel } from '../shared/user.model';
 import { ServiceService } from 'src/app/shared/services/service.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ReviewService } from 'src/app/shared/services/review.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
   constructor(private serviceService: ServiceService,
               private userService: UserService,
               private reviewService: ReviewService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
     this.hasUser = false;
   }
 
@@ -31,6 +32,8 @@ export class ProfileComponent implements OnInit {
     });
     if(this.uid == undefined)
       this.uid = this.userService.uid;
+    if(!this.userService.uid)
+      this.router.navigate(['/login']);
     console.log(this.uid);
     // this.reviewService.getUserReviews(this.userService.uid).on('value', snap => {
     this.reviewService.getUserReviews(this.uid).on('value', snap => {

@@ -52,6 +52,7 @@ export class AddServiceComponent implements OnInit {
         this.form.value.category,
         this.imagesURL,
         this.userService.uid,
+        '',
         this.uid,
         this.form.value.service_type,
         'my_service',
@@ -65,7 +66,7 @@ export class AddServiceComponent implements OnInit {
       this.userService.getImage(url).getDownloadURL().then( (resp) => {
         this.imagesURL.push(resp);
         console.log(this.imagesURL);
-        console.log('Done image' + index);
+        console.log('Done image ' + index);
         this.addImages(index+1);
       });
     });
@@ -97,13 +98,12 @@ export class AddServiceComponent implements OnInit {
     }
   }
 
-  onChange(event: any, input: any) {
+  onChange(event: any) {
     const files = [].slice.call(event.target.files);
     const indMax = files.length-1;
     for ( let i = 0;i<=indMax;++i) {
       if (event.target.files && files[i]) {
         const reader = new FileReader();
-
         reader.onload = (events: ProgressEvent) => {
           this.imagesURL.push((<FileReader>events.target).result);
         };

@@ -7,6 +7,7 @@ export class ServiceModel {
   public category: string;
   public imagePath: string[];
   public fromUser: string;
+  public toUser: string;
   public uid: string;
   public isOffer: boolean;
   public status: string;
@@ -19,6 +20,7 @@ export class ServiceModel {
               category: string,
               imagePath: string[],
               fromUser: string,
+              toUser: string,
               uid: string,
               isOffer: boolean,
               status: string,
@@ -31,6 +33,7 @@ export class ServiceModel {
     this.category = category;
     this.imagePath = imagePath;
     this.fromUser = fromUser;
+    this.toUser = toUser;
     this.uid = uid;
     this.isOffer = isOffer;
     this.status = status;

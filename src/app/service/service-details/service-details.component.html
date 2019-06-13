@@ -17,12 +17,13 @@
   </div>
   <div class="col s6" id="serviceInfo">
     <div id="serviceData1" class="">
-      <h4 id="serviceTitle">{{ service.title }}</h4>
-      <a id="serviceAuthor" routerLink = "/profile/{{ service.fromUser }}">{{ author.username }}</a>
+      <h4 id="serviceTitle"><b>Service: </b>{{ service.title }}</h4>
+      <a id="serviceAuthor" routerLink = "/profile/{{ service.fromUser }}"><b>User: </b>{{ author.username }}</a>
       <p id="serviceBarter" class="green-text" *ngIf="service.barter">✓ Barter</p>
     </div>
     <div id="serviceData2" class="">
-      <div class="rating half label-left">
+
+      <div class="rating half label-left"><b>Rating: </b>{{service.rating}}
         <star-rating
         [starType]="'svg'"
         [rating]="service.rating"
@@ -30,7 +31,7 @@
         <!--[hoverEnabled]="true"-->
       </div>
       <div class="payment">
-        <p id="servicePrice">{{ service.price }} EUR</p>
+        <p id="servicePrice"><b>Price: </b>{{ service.price }} EUR</p>
         <div id="paypal-button" *ngIf="isAuth()"></div>
         <div class="tooltipped" materialize="tooltip"  data-position="bottom" data-tooltip="You have to login to purchase this service">
           <a *ngIf="!isAuth()" class = "btn-large disabled" >
@@ -43,7 +44,7 @@
 </div>
 <div class="row">
   <div id="serviceContent">
-		<h2>Descriere</h2>
+		<h3>Descriere</h3>
 		<p id="serviceDescription">{{ service.desc }}</p>
 	</div>
 </div>

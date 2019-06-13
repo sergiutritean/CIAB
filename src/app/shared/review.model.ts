@@ -1,25 +1,27 @@
-import { from } from 'rxjs/index';
-
 export class ReviewModel {
   public rating: number;
   public imagePath: string[];
   public content: string;
   public fromUser: string;
-  public dest: {
-    isUser: boolean;
-    id: string;
-  };
+  public idService: string;
+  public title: string;
+  public reviewUID: string;
 
-  constructor(rating: number,
-              imagePath: string[],
+  constructor(title: string,
               content: string,
+              rating: number,
+              imagePath: string[],
               fromUser: string,
-              dest: {isUser: boolean, id: string}) {
+              idService: string,
+              reviewUID: string) {
+
+    this.title = title;
     this.rating = rating;
     this.imagePath = imagePath;
     this.content = content;
     this.fromUser = fromUser;
-    this.dest = dest;
+    this.idService = idService;
+    this.reviewUID = reviewUID;
   }
 
 }

@@ -37,6 +37,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaymentService } from 'src/app/shared/services/payment.service';
 import { ReviewFormComponent } from './review-form/review-form.component';
+import { ReviewsUserComponent } from './profile/reviews-user/reviews-user.component';
+import { ServicesUserComponent } from './profile/services-user/services-user.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
@@ -57,6 +59,9 @@ const appRoutes: Routes = [
     { path: ':id', component: ServiceComponent}
   ]},
   { path: 'support', component: SupportComponent},
+  { path: 'review' ,children: [
+    {path: ':uid', component: ReviewFormComponent}
+  ]},
 ];
 
 @NgModule({
@@ -85,7 +90,9 @@ const appRoutes: Routes = [
     AllServicesComponent,
     ServiceComponent,
     PaymentServiceComponent,
-    ReviewFormComponent
+    ReviewFormComponent,
+    ReviewsUserComponent,
+    ServicesUserComponent
   ],
   imports: [
     MaterializeModule,

@@ -1,7 +1,7 @@
 <app-service-details *ngIf="service != null" [service]="service"></app-service-details>
 <div class="row">
   <div id="serviceReviews">
-    <h2>Reviews</h2>
-    <app-reviews></app-reviews>
+    <h3>Reviews</h3>
+    <app-reviews [uid]="service.uid"></app-reviews>
   </div>
 </div>

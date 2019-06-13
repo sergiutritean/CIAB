@@ -1,0 +1,24 @@
+<ul class="reviewsContainer collection" *ngFor="let review of reviews">
+  <li class="review collection-item" style="list-style: none">
+    <p class="reviewTitle"><b>User: </b>{{ review.fromUser }}</p>
+    <div class="reviewContent">
+      {{ review.content}} <br>
+      <b>Rating: </b>{{review.rating}}
+      <star-rating
+        [starType]="'svg'"
+        [rating]="review.rating"
+        [readOnly]="true">
+      </star-rating>
+    </div>
+    <div class="reviewPhotos">
+      <div *ngFor="let photo of review.imagePath">
+        <img
+          class="materialboxed"
+          height="100px"
+          width="auto"
+          src='{{ photo }}'>
+      </div>
+    </div>
+  </li>
+
+</ul>
