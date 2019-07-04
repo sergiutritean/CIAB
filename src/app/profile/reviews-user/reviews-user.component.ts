@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ReviewModel} from "../../shared/review.model";
 import {ServiceService} from "../../shared/services/service.service";
 import {UserService} from "../../shared/services/user.service";
@@ -11,6 +11,7 @@ import {ReviewService} from "../../shared/services/review.service";
 })
 export class ReviewsUserComponent implements OnInit {
 
+  @Input() userUID: any;
   reviews: ReviewModel[];
   constructor(private serviceService:ServiceService,
               private userService: UserService,
@@ -18,20 +19,24 @@ export class ReviewsUserComponent implements OnInit {
 
   ngOnInit() {
     let serviceUID = [];
-    this.serviceService.getServices(this.userService.uid).once('value', snap => {
+    this.serviceService.getServices(this.userUID).once('value', snap => {
       for(let uid in snap.val()) serviceUID.push(uid);
-    });
-    console.log(serviceUID);
-    this.reviewService.getReviews().on('value', snap => {
-      this.reviews = snap.val().filter( review =>{
-        console.log(review.idService);
-        if(serviceUID.includes(review.idService)) {
-          review.fromUser = this.userService.convertUIDtoName(review.fromUser);
-          return true;
-        }
-        return false;
+      console.log(serviceUID,this.userUID);
+      serviceUID = serviceUID.filter( uid => snap.val()[uid][0].fromUser === this.userUID);
+      console.log(serviceUID,this.userUID);
+      this.reviewService.getReviews().on('value', snap => {
+        this.reviews = snap.val().filter( review =>{
+          console.log(review.idService);
+          if(serviceUID.includes(review.idService)) {
+            review.fromUser = this.userService.convertUIDtoName(review.fromUser);
+            return true;
+          }
+          return false;
+        });
+        console.log(this.reviews);
       });
     });
+
   }
 
 }

@@ -5,8 +5,7 @@
        [materializeParams]="[{menuWidth: 300,edge: 'left', closeOnClick: true, draggable: true}]"><i class="material-icons black-text">menu</i>
     </a>
     <ul id="nav-mobile" class="right hide-on-med-and-down" [ngSwitch]="isAuth()">
-      <li routerLinkActive = "active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="" class="black-text">Acasa</a></li>
-      <li routerLinkActive = "active"><a routerLink="/categories" class="black-text">Categorii</a></li> <!-- Dropdown -->
+      <li routerLinkActive = "active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="" class="black-text">Acasa</a></li>s
       <li routerLinkActive = "active"><a routerLink="/services" class="black-text">Servicii</a></li> <!-- Dropdown -->
       <li routerLinkActive = "active" *ngIf="isAuth()"><a routerLink = "/dashboard" class="black-text">Dashboard</a></li>
       <li routerLinkActive = "active" *ngIf="isAuth()"><a routerLink = "/profile" class="black-text">Profile</a></li>

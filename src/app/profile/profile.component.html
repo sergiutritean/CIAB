@@ -24,6 +24,15 @@
 </div>
 <div class="row" *ngIf = "hasUser">
   <div class="col">
+    <h3>Categorii</h3>
+    <div *ngFor="let category of user.categories" class="row">
+      <div class="col chip">{{category}}</div>
+    </div>
+
+  </div>
+</div>
+<div class="row" *ngIf = "hasUser">
+  <div class="col">
     <h3>Contact</h3>
     <ul>
       <li><b>Mail: </b>   {{ user.email }}</li>
@@ -36,12 +45,10 @@
 <div class="row" *ngIf = "hasUser">
   <div class="col s6">
     <h2>Reviews</h2>
-    <app-reviews-user></app-reviews-user>
+    <app-reviews-user [userUID]="user.uid"></app-reviews-user>
   </div>
   <div class="col s6">
     <h2>Services</h2>
-    <app-services-user></app-services-user>
+    <app-services-user [userUID]="user.uid"></app-services-user>
   </div>
 </div>
-<!--TODO: Modifica ratingul la user-->
-<!--TODO: Modifica sa apara username-ul-->

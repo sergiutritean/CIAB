@@ -11,6 +11,7 @@ export class UserModel {
   public username: string;
   public barter: boolean;
   public imageURL: string;
+  public categories: string[];
 
   constructor (name: string,
                uid: string,
@@ -22,7 +23,8 @@ export class UserModel {
                desc: string,
                username: string,
                barter: boolean,
-               imageURL: string) {
+               imageURL: string,
+               categories: string[]) {
 
     this.name = name;
     this.uid = uid;
@@ -35,5 +37,6 @@ export class UserModel {
     this.username = username;
     this.barter = barter;
     this.imageURL = imageURL;
+    this.categories = categories;
   }
 }

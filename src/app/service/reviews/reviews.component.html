@@ -1,5 +1,4 @@
-<div class="reviewsContainer collection">
-  <app-review *ngFor="let review of reviews"
-  [review]="review">
+<ul class="reviewsContainer collection" *ngFor="let review of reviews">
+  <app-review [review]="review">
   </app-review>
-</div>
+</ul>

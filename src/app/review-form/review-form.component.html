@@ -7,11 +7,13 @@
           <div class="input-field col s12">
             <label for='nsFormTitle'>Titlu</label>
             <input type='text' id='nsFormTitle' name='title' formControlName="title" class="validate" required>
+            <span class="helper-text" data-error="Titlul este necesar!">Helper text</span>
           </div>
 
           <div class="input-field col s12">
             <label for='nsFormDescription'>Descriere</label>
             <textarea class="materialize-textarea validate" id='nsFormDescription' name='description' formControlName="desc" required></textarea>
+            <span class="helper-text" data-error="Descrierea este necesara!" data-success="right">Helper text</span>
           </div>
 
           <div class="col s3"></div>

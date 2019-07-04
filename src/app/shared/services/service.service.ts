@@ -66,6 +66,7 @@ export class ServiceService {
       for(let key in snap.val()) {
         goodServices.push(...snap.val()[key].filter(service => service.status === 'my_service'));
       }
+      console.log(goodServices);
       return goodServices;
     })
   }

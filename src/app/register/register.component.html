@@ -70,6 +70,16 @@
             <input type="text" class="validate" formControlName="location"/>
           </div>
 
+          <!--Categorii-->
+          <div class="input-field col s12">
+            <select multiple formControlName="categories" materialize="material_select"
+                    [materializeSelectOptions]="categories" #select>
+              <option value="" disabled selected>Choose your option</option>
+              <option [value]="category" *ngFor="let category of categories;index as i">{{ category }}</option>
+            </select>
+            <label>Domenii in care prestezi servicii</label>
+          </div>
+
           <!--Description-->
           <div class="input-field col s12">
             <label>Describe yourself</label>

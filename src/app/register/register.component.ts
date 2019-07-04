@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { UserModel } from 'src/app/shared/user.model';
@@ -17,12 +17,15 @@ export class RegisterComponent implements OnInit {
   userIndex: any;
   error: any;
   currUser: any;
+  categories: any;
+
 
   form = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
     account_type: new FormControl(''),
     phone: new FormControl(''),
+    categories: new FormControl(''),
     location: new FormControl(''),
     desc: new FormControl(''),
     username: new FormControl(''),
@@ -32,14 +35,21 @@ export class RegisterComponent implements OnInit {
   });
 
   constructor(private userService: UserService,
-              private router: Router) { }
+              private router: Router) {
+    this.userService.getCategories().on('value', snap => {
+      this.categories = snap.val();
+      console.log(this.categories);
+    })
+  }
 
   ngOnInit() {
     this.image = null;
     this.imageURL = null;
+
   }
 
   onRegUser() {
+    console.log(this.form.value.categories);
     this.error = null;
     this.currUser = new UserModel(
       this.form.value.name,
@@ -52,7 +62,8 @@ export class RegisterComponent implements OnInit {
       this.form.value.desc,
       this.form.value.username,
       this.form.value.barter,
-      ''
+      '',
+      this.form.value.categories
     );
     if (this.form.value.password1 !== this.form.value.password2) {
       this.error = 'Passwords don\'t match!';
@@ -60,6 +71,7 @@ export class RegisterComponent implements OnInit {
     }
     const email = this.form.value.email;
     const password = this.form.value.password1;
+
     this.userService.registerUser(email, password).then(resp => { // Register user in Firebase Auth
       this.currUser.uid = resp.user.uid;
       this.userService.uid = resp.user.uid;

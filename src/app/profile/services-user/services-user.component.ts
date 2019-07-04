@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ServiceService} from "../../shared/services/service.service";
 import {ServiceModel} from "../../shared/service.model";
 import {UserService} from "../../shared/services/user.service";
@@ -10,12 +10,13 @@ import {UserService} from "../../shared/services/user.service";
 })
 export class ServicesUserComponent implements OnInit {
 
+  @Input() userUID: any;
   services: ServiceModel[] = [];
   constructor(private serviceService: ServiceService,
               private userService: UserService) { }
 
   ngOnInit() {
-    this.serviceService.getServices(this.userService.uid).on('value', snap => {
+    this.serviceService.getServices(this.userUID).on('value', snap => {
       console.log(snap.val());
       for(let key in snap.val()){
         this.services.push(...snap.val()[key].filter(service => service.status === 'my_service'));

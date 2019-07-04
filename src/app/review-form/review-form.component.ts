@@ -83,8 +83,9 @@ export class ReviewFormComponent implements OnInit {
         this.reviewUID
       );
       console.log(this.reviewToAdd);
-      this.reviewService.getReviews(this.serviceUID).once('value', snap => {
+      this.reviewService.getReviews().once('value', snap => {
         let allReviews = snap.val();
+        console.log(allReviews);
         if(!allReviews) allReviews = [];
         console.log(this.reviewToAdd);
         allReviews.push(this.reviewToAdd);
