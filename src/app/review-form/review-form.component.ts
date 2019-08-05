@@ -17,9 +17,9 @@ import {ReviewService} from "../shared/services/review.service";
 export class ReviewFormComponent implements OnInit {
 
   form = new FormGroup({
-    title: new FormControl('', [Validators.required]),
-    desc: new FormControl('', [Validators.required]),
-    rating: new FormControl('')
+    title: new FormControl('', Validators.required),
+    desc: new FormControl('', Validators.required),
+    rating: new FormControl('', Validators.required)
   });
 
   images: Array<any>;
@@ -60,7 +60,7 @@ export class ReviewFormComponent implements OnInit {
   }
 
   notAuth(){
-    return !this.userService.isAuthenticated();
+    //return !this.userService.isAuthenticated();
   }
 
   onSubmit(){
@@ -72,64 +72,7 @@ export class ReviewFormComponent implements OnInit {
       return;
     }
     this.reviewUID = this.serviceService.getUniqueID();
-    this.addImages(0).then( () => {
-      this.reviewToAdd = new ReviewModel(
-        this.form.value.title,
-        this.form.value.desc,
-        this.form.value.rating,
-        this.imagesURL,
-        this.userService.uid,
-        this.serviceUID,
-        this.reviewUID
-      );
-      console.log(this.reviewToAdd);
-      this.reviewService.getReviews().once('value', snap => {
-        let allReviews = snap.val();
-        console.log(allReviews);
-        if(!allReviews) allReviews = [];
-        console.log(this.reviewToAdd);
-        allReviews.push(this.reviewToAdd);
-        let newRating = 0;
-        console.log(allReviews);
-        allReviews.forEach( review => newRating += review.rating);
-        newRating /= allReviews.length;
-
-        this.reviewService.updateDB(allReviews).then( () => {
-          toast('Review sent succsesfull!',1500);
-          let users = '';
-          this.serviceService.getServices().once('value', snap => {
-            users = snap.val();
-            console.log(users);
-            let uidBuyer = this.userService.uid;
-            console.log(this.service);
-            let uidSeller = this.service.fromUser;
-            if(!this.service.isOffer){
-              let aux = uidBuyer;
-              uidBuyer = uidSeller;
-              uidSeller = aux;
-            }
-
-            //delete waiting
-            console.log(uidBuyer,this.service.uid);
-            let ind = users[uidBuyer][this.service.uid].findIndex( service => service.status === 'waiting');
-            console.log(users[uidBuyer][this.service.uid][ind]);
-            users[uidBuyer][this.serviceUID][ind].status = 'done';
-
-            //delete & modify original
-            users[uidSeller][this.service.uid] = users[uidSeller][this.service.uid].filter( service => service.status !== 'processing');
-            let ind2 = users[uidSeller][this.service.uid].findIndex(service => service.status === 'my_service');
-            console.log(ind2);
-            users[uidSeller][this.service.uid][ind2].rating = newRating;
-
-            this.reviewService.modify_user_rating(this.service.fromUser);
-
-          }).then( () => {
-            this.serviceService.getServices().set(users);
-          });
-          this.router.navigate(['dashboard']);
-        });
-      })
-    });
+    this.addImages(0);
   }
 
   onChange(event: any) {
@@ -151,8 +94,64 @@ export class ReviewFormComponent implements OnInit {
   addImages(index: number) {
     return new Promise((resolve) => {
       if(!index) this.imagesURL = [];
+      let date = new Date();
+      let timestamp  = date.getTime();
       if(index === this.images.length) {
-        return;
+        this.reviewToAdd = new ReviewModel(
+          this.form.value.title,
+          this.form.value.desc,
+          this.form.value.rating,
+          this.imagesURL,
+          this.userService.uid,
+          this.serviceUID,
+          this.reviewUID,
+          timestamp,
+          this.reviewService.afterPurchase
+        );
+        this.reviewService.afterPurchase = false;
+        console.log(this.reviewToAdd);
+        this.reviewService.getReviews().once('value', snap => {
+          let allReviews = snap.val();
+          console.log(allReviews);
+          if(!allReviews) allReviews = [];
+          console.log(this.reviewToAdd);
+          allReviews.push(this.reviewToAdd);
+          let newRating = 0;
+          console.log(allReviews);
+          allReviews.forEach( review => newRating += review.rating);
+          newRating /= allReviews.length;
+
+          this.reviewService.updateDB(allReviews).then( () => {
+            toast('Review sent succsesfull!',1500);
+            let users = '';
+            this.serviceService.getServices().once('value', snap => {
+              users = snap.val();
+              console.log(users);
+              let uidBuyer = this.userService.uid;
+              console.log(this.service);
+              let uidSeller = this.service.fromUser;
+              if(!this.service.isOffer){
+                let aux = uidBuyer;
+                uidBuyer = uidSeller;
+                uidSeller = aux;
+              }
+
+              let ind2 = users[uidSeller][this.service.uid].findIndex(service => service.status === 'my_service');
+              console.log(ind2);
+              users[uidSeller][this.service.uid][ind2].rating = newRating;
+
+              this.reviewService.modify_user_rating(this.service.fromUser);
+
+            }).then( () => {
+              this.serviceService.getServices().set(users);
+              /*Failed payment after review*/
+              /*            if(this.reviewToAdd.rating >= 3 && this.userService.actions) {
+                            this.userService.actions.execute();
+                          }*/
+            });
+            this.router.navigate(['dashboard']);
+          });
+        })
       }
       const url = 'reviews/' + this.reviewUID + '/' + index;
       const uploadTask = this.serviceService.addImage(url, this.images[index]);
@@ -168,4 +167,5 @@ export class ReviewFormComponent implements OnInit {
     });
 
   }
+
 }

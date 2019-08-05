@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 
 //import * as $ from 'jquery';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-header',

@@ -10,8 +10,10 @@ import {ReviewService} from "../../shared/services/review.service";
   styleUrls: ['./reviews.component.scss']
 })
 export class ReviewsComponent implements OnInit {
-  reviews: ReviewModel[];
+  reviews: any[];
   @Input() uid: string;
+
+
 /*  reviews: ReviewModel[] = [
     new ReviewModel(
       4,
@@ -35,8 +37,19 @@ export class ReviewsComponent implements OnInit {
       console.log(this.reviews);
       this.reviews.forEach( review => {
         this.userService.getUsers().once('value', snap2 => {
-          review.fromUser = snap2.val().filter(user => user.uid === review.fromUser)[0].username;
-          console.log(review);
+          let fromUser = snap2.val().filter(user => user.uid === review.fromUser)[0];
+          review.fromUser = fromUser.username;
+          review.imageFromUser = fromUser.imageURL;
+          review.partnerUID = fromUser.isPartner;
+          if(fromUser.isPartner){
+            this.userService.getPartners().once('value', snap => {
+              review.partner = snap.val()[fromUser.isPartner];
+              let photoURL = fromUser.isPartner + '/logo.png';
+              this.userService.refToStorage(photoURL).getDownloadURL().then(val => {
+                review.partnerImage = val;
+              });
+            });
+          }
         });
       });
     });

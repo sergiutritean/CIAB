@@ -1,51 +1,127 @@
-<div class="row">
-  <div class="col s6" id="servicePhotos">
-    <div id="photoShow">
-      <img height="300px"
-           width="auto"
-           [src]="service.imagePath[0]">
-    </div>
-    <div id="photosMin">
-      <div *ngFor="let photo of service.imagePath">
-        <img materialize="materialbox"
-             class="materialboxed"
-             height="100px"
+<div class="container">
+  <div class="row">
+    <div class="col s6" id="servicePhotos">
+      <div id="photoShow">
+        <img height="300px"
              width="auto"
-             [src]="photo">
+             [src]="service.imagePath[0]" *ngIf="service.imagePath">
+        <img class="materialboxed"
+             height="300px"
+             width="auto"
+             [src]="'http://aztechanalytics.com/background.png'"
+             (click)="openModal()" *ngIf="!service.imagePath && service.fromUser === this.uidUser">
+      </div>
+      <div id="photosMin" *ngIf="service.imagePath">
+        <div *ngFor="let photo of service.imagePath;let i=index">
+          <img materialize="materialbox"
+               class="materialboxed"
+               height="100px"
+               width="auto"
+               [src]="photo">
+        </div>
+        <div *ngIf="serviceOfThisUser()">
+          <img class="materialboxed"
+               height="100px"
+               width="auto"
+               [src]="'http://aztechanalytics.com/background.png'"
+               (click)="openModal()">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col s6" id="serviceInfo">
-    <div id="serviceData1" class="">
-      <h4 id="serviceTitle"><b>Service: </b>{{ service.title }}</h4>
-      <a id="serviceAuthor" routerLink = "/profile/{{ service.fromUser }}"><b>User: </b>{{ author.username }}</a>
-      <p id="serviceBarter" class="green-text" *ngIf="service.barter">✓ Barter</p>
-    </div>
-    <div id="serviceData2" class="">
+    <div class="col s6" id="serviceInfo">
+      <div id="serviceData1" class="">
+        <h4 id="serviceTitle"><b>{{service.isOffer == 'offer'?'Oferta:':'Cerere:'}}</b>{{ service.title }}</h4>
+        <a id="serviceAuthor" routerLink = "/profile/{{ service.fromUser }}"><b>User: </b>{{ author.username }}</a>
 
-      <div class="rating half label-left"><b>Rating: </b>{{service.rating}}
-        <star-rating
-        [starType]="'svg'"
-        [rating]="service.rating"
-        [readOnly]="true"></star-rating>
-        <!--[hoverEnabled]="true"-->
+        <div *ngIf="service.barter" class="row">
+          <p id="serviceBarter" class="green-text col s12 m3">✓ Barter</p>
+          <div class="btn-large green col s12 m9" (click)="openBarterModal()" *ngIf="isAuth() && service.isOffer == 'offer'">
+            <span>Cere barter</span>
+          </div>
+        </div>
       </div>
-      <div class="payment">
-        <p id="servicePrice"><b>Price: </b>{{ service.price }} EUR</p>
-        <div id="paypal-button" *ngIf="isAuth()"></div>
-        <div class="tooltipped" materialize="tooltip"  data-position="bottom" data-tooltip="You have to login to purchase this service">
-          <a *ngIf="!isAuth()" class = "btn-large disabled" >
-           Buy
-          </a>
+      <div id="serviceData2" class="">
+
+        <div class="rating half label-left"><b>Rating: </b>{{service.rating}}
+          <star-rating
+            [starType]="'svg'"
+            [rating]="service.rating"
+            [readOnly]="true"></star-rating>
+          <!--[hoverEnabled]="true"-->
+        </div>
+        <div class="payment">
+          <p id="servicePrice"><b>Price: </b>{{ service.price }} EUR</p>
+          <div id="paypal-button" *ngIf="isAuth() && service.isOffer == 'offer'"></div>
+          <div class="btn-large black" *ngIf="isAuth() && service.isOffer == 'request'" (click) = "confirmRequest()"> Accepta cererea! </div>
+          <div *ngIf="!isAuth() && service.isOffer == 'offer'" class="tooltipped" materialize="tooltip"  data-position="bottom" data-tooltip="You have to login to purchase this service">
+            <a class = "btn-large disabled" >
+              Buy
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="row">
+    <div id="serviceContent">
+      <h3>Descriere</h3>
+      <p id="serviceDescription">{{ service.desc }}</p>
+    </div>
+  </div>
+  <div *ngIf="modalStatus=='picture'" id="modaltest" class="modal valign-wrapper" materialize="modal" style="transform: translateY(-50%) !important;"
+       [materializeParams]="[{dismissible: true}]" [materializeSelectOptions]="[{startingTop:'25%'}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+      <h4>Adaugă poze</h4>
+      <p>Poți adăuga câte poze vrei</p>
+      <div class="modal-body">
+        <input type="file" multiple name="photos" (change)="onChange($event)">
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <a class="waves-effect waves-black btn-flat" (click)="addImages(0)">Confirmă adăugarea</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="modalStatus=='barter'" id="modal2" class="modal valign-wrapper" materialize="modal" style="transform: translateY(-50%) !important;"
+       [materializeParams]="[{dismissible: true}]" [materializeSelectOptions]="[{startingTop:'25%'}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+      <h4>Selectează un serviciu</h4>
+      <p>Selectează serviciul cu care vrei să faci barter</p>
+      <div class="modal-body" >
+        <div *ngIf="userServices">
+          <div *ngFor="let service of userServices; let i=index"
+               class="align-wrapper hoverable flow-text"
+               style="overflow: auto">
+            <div (click)="selectService(i)"
+                 [ngStyle]="{'background-color':(i==selectedIndex?'#4CAF50':'#F0F0F0'),
+                            'color':(i==selectedIndex?'white':'black')}"
+                 style="padding:1rem 0"
+                 class="row">
+              <div class="col s4">
+                <img [src]="service.imagePath[0]"
+                     style="width: 100%; height: 100%;"/>
+              </div>
+              <div class="col s4">
+                <strong>Title: </strong>{{service.title}}
+              </div>
+              <div class="col s4">
+                <strong>Price: </strong>{{service.price}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!userServices">
+          <p>Nu ai servicii cu care poti face barter</p>
+        </div>
+      </div>
+      <div class="modal-footer valign-wrapper">
+        <div class="row">
+          <button class="waves-effect waves-black btn-large green"
+                  (click)="askBarter()" [disabled]="selectedIndex==-1" >Confirmă cererea</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
-<div class="row">
-  <div id="serviceContent">
-		<h3>Descriere</h3>
-		<p id="serviceDescription">{{ service.desc }}</p>
-	</div>
-</div>
-<!--TODO: Make possibe to see others profile-->

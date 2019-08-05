@@ -1,3 +1,5 @@
+import {after} from "selenium-webdriver/testing";
+
 export class ReviewModel {
   public rating: number;
   public imagePath: string[];
@@ -6,6 +8,8 @@ export class ReviewModel {
   public idService: string;
   public title: string;
   public reviewUID: string;
+  public timestamp: any;
+  public afterPurchase: boolean;
 
   constructor(title: string,
               content: string,
@@ -13,7 +17,9 @@ export class ReviewModel {
               imagePath: string[],
               fromUser: string,
               idService: string,
-              reviewUID: string) {
+              reviewUID: string,
+              timestamp: any,
+              afterPurchase: boolean) {
 
     this.title = title;
     this.rating = rating;
@@ -22,6 +28,8 @@ export class ReviewModel {
     this.fromUser = fromUser;
     this.idService = idService;
     this.reviewUID = reviewUID;
+    this.timestamp = timestamp;
+    this.afterPurchase = afterPurchase;
   }
 
 }

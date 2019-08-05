@@ -47,6 +47,7 @@ export class AllServicesComponent implements OnInit {
     const all_categories = event.all;
     const price = event.price;
     const barter = event.barter;
+    const only_barter = event.only_barter;
     const category = event.category;
 
     //title
@@ -87,8 +88,18 @@ export class AllServicesComponent implements OnInit {
 
     //barter
     if(barter){
+      this.servicesToShow.sort( ( x, y) => {
+        if(x.barter == y.barter) {
+          return (x.title < y.title == true? 1:0);
+        }
+        return x.barter < y.barter == true?1:0;
+      })
+    }
+
+    //only_barter
+    if(only_barter){
       this.servicesToShow = this.servicesToShow.filter( service => {
-        return service.barter === barter;
+        return service.barter === only_barter;
       });
     }
     console.log(this.servicesToShow);

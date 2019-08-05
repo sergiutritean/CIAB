@@ -31,15 +31,7 @@
 		width:  14rem;
 		height: 14rem;
 		margin: 1rem;
-
-		&:nth-child(1) {
-			color: #FFFFFF;
-			background: linear-gradient(135deg,#FFE2C6 , #CC8C4D);
-		}
-		&:nth-child(2) {
-			color: #FFFFFF;
-			background: linear-gradient(135deg,#63C5E3 , #2C92B1);
-		}
+    text-color: black;
 
 		a {
 			display: flex;

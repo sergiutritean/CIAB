@@ -1,3 +1,5 @@
+import {PendingModel} from "./pending.model";
+
 export class UserModel {
 
   public name: string;
@@ -12,6 +14,8 @@ export class UserModel {
   public barter: boolean;
   public imageURL: string;
   public categories: string[];
+  public isPartner: any;
+  public pending: PendingModel[];
 
   constructor (name: string,
                uid: string,
@@ -24,7 +28,9 @@ export class UserModel {
                username: string,
                barter: boolean,
                imageURL: string,
-               categories: string[]) {
+               categories: string[],
+               isPartner: any,
+               pending: PendingModel[]) {
 
     this.name = name;
     this.uid = uid;
@@ -38,5 +44,7 @@ export class UserModel {
     this.barter = barter;
     this.imageURL = imageURL;
     this.categories = categories;
+    this.isPartner = isPartner;
+    this.pending = pending;
   }
 }

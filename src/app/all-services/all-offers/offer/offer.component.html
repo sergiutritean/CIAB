@@ -3,7 +3,7 @@
     <img [src]="service.imagePath[0]" width="100%" height="100%"/>
   </div>
   <div class="col s6 serviceData1">
-    <p class="serviceTitle truncate">{{ service.title }}</p>
+    <p class="serviceTitle truncate">{{service.isOffer == 'offer'?'Oferta: ':'Cerere: '}}{{ service.title }}</p>
     <p class="serviceDesc truncate">{{ service.desc }}</p>
     <p class="serviceRating"><span class="amber-text text-darken-1">★</span>{{ service.rating }}</p>
   </div>

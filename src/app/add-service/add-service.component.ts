@@ -19,6 +19,9 @@ export class AddServiceComponent implements OnInit {
   uid: string;
   categories: string[];
   categoriesToShow: string[];
+  showLoader: boolean;
+  barterShow: boolean;
+  error: string;
 
   form = new FormGroup({
     service_type: new FormControl('', [Validators.required]),
@@ -34,8 +37,10 @@ export class AddServiceComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.showLoader = false;
     this.images = [];
     this.imagesURL = [];
+    this.barterShow = true;
     this.userService.getCategories().on('value', snap  => {
       this.categories = snap.val();
     });
@@ -44,6 +49,31 @@ export class AddServiceComponent implements OnInit {
   addImages(index: number) {
     if(!index) this.imagesURL = [];
     if (index === this.images.length) {
+      return;
+    }
+    const url = 'services/' + this.userService.uid + '/' + this.uid + '/' + index;
+    const uploadTask = this.serviceService.addImage(url, this.images[index]);
+    uploadTask.on('state_changed', snapshot => {
+      this.showLoader = true;
+    }, error => {console.log(error); this.showLoader = false;}, ()=>{
+      this.showLoader = false;
+      this.userService.getImage(url).getDownloadURL().then( (resp) => {
+        this.imagesURL.push(resp);
+        console.log(this.imagesURL);
+        console.log('Done image ' + index);
+        this.addImages(index+1);
+      });
+    });
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
+    if(!this.imagesURL){
+      this.error = 'Te rugam sa adaugi o poza la serviciul/cererea ta!';
+      return;
+    }
+    if (this.form.valid) {
+      this.imagesURL.shift();
       this.serviceToAdd = new ServiceModel(
         this.form.value.barter,
         this.form.value.title,
@@ -58,42 +88,31 @@ export class AddServiceComponent implements OnInit {
         'my_service',
         this.form.value.price
       );
-      return;
-    }
-    const url = 'services/' + this.userService.uid + '/' + this.uid + '/' + index;
-    const uploadTask = this.serviceService.addImage(url, this.images[index]);
-    uploadTask.on('state_changed', snapshot => {}, error => {console.log(error)}, ()=>{
-      this.userService.getImage(url).getDownloadURL().then( (resp) => {
-        this.imagesURL.push(resp);
-        console.log(this.imagesURL);
-        console.log('Done image ' + index);
-        this.addImages(index+1);
-      });
-    });
-  }
-
-  onSubmit() {
-    console.log(this.form.value);
-    if (this.form.valid) {
       this.uid = this.serviceService.getUniqueID();
-      this.addImages(0);
+      this.serviceToAdd.uid = this.uid;
       console.log(this.imagesURL);
       this.userService.getUsers().once( 'value', snap => {
         const users = snap.val();
-        const index = users.findIndex(user => user.uid === this.userService.uid);
+        console.log(this.userService.uid);
+        console.log(users);
+        const index = users.findIndex(user => {
+          if(user) return user.uid === this.userService.uid;
+          return false;
+        });
+        console.log(index);
         const text = this.form.value.service_type;
+        console.log(text);
         if(!users[index][text]) users[index][text] = [];
         users[index][text].push(this.uid);
         console.log(this.serviceToAdd);
+        console.log(users);
         this.userService.updateDB(users).then( () => {
           this.serviceService.addService(this.serviceToAdd, this.serviceToAdd.fromUser).then( () => {
             this.form.reset();
             toast('Service added succesfully!', 1000);
             this.router.navigate(['dashboard']);
-          })
-            .catch(err => console.log(err));
-        })
-          .catch(err => console.log(err));
+          }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
       });
     }
   }
@@ -112,6 +131,11 @@ export class AddServiceComponent implements OnInit {
         this.images.push(files[i]);
       }
     }
+    this.addImages(0);
   }
 
+  showBarter(ans){
+    console.log('showbarter',ans);
+    this.barterShow = ans;
+  }
 }

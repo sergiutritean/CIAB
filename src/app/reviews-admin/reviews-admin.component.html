@@ -1,0 +1,61 @@
+<div style="width: 100% !important;">
+  <form *ngIf="!isLoggedIn()" [formGroup] = 'form'>
+    <input type="password" formControlName="pass" placeholder="Introdu parola" class="right">
+    <button class="waves-effect waves-light btn-large black" type="submit">Submit</button>
+  </form>
+  <div *ngIf="!reviews" class="flaw-text">
+    Nu sunt review-uri trimise!
+  </div>
+  <div *ngIf="isLoggedIn() && reviews">
+    <div class="div row" >
+      <div class="col s3">
+        <strong>Nume prestator</strong>
+      </div>
+      <div class="col s3">
+        <strong>Nume Beneficiar</strong>
+      </div>
+      <div class="col s3">
+        <strong>ID serviciu</strong>
+      </div>
+      <div class="col s3">
+        <strong>Timestamp</strong>
+      </div>
+      <div class="divider"></div>
+
+      <div *ngFor="let review of reviews">
+        <div class="col s3">
+          {{ review.fromUser }}
+        </div>
+        <div class="col s3">
+          {{ review.toUser }}
+        </div>
+        <div class="col s3">
+          {{ review.idService}}
+        </div>
+        <div class="col s3">
+          {{ review.timestamp | date: 'medium'}}
+        </div>
+        <div class="divider"></div>
+      </div>
+    </div>
+
+  </div>
+
+<!--  <table *ngIf="isLoggedIn()" class="centered">
+    <thead>
+    <tr>
+      <th>Titlu</th>
+      <th>Nemultumire</th>
+      <th>Sugestii</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let feedback of feedbacks">
+      <td>{{feedback.title}}</td>
+      <td>{{feedback.nemultumiri}}</td>
+      <td>{{feedback.sugestii}}</td>
+    </tr>
+    </tbody>
+  </table>-->
+</div>

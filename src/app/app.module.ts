@@ -13,7 +13,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ServicesComponent } from './dashboard/services/services.component';
 import { ShowServiceComponent } from './dashboard/services/show-service/show-service.component';
 import { ServiceComponent } from './service/service.component';
-import { FeedbackComponent } from './feedback/feedback.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -39,12 +38,15 @@ import { PaymentService } from 'src/app/shared/services/payment.service';
 import { ReviewFormComponent } from './review-form/review-form.component';
 import { ReviewsUserComponent } from './profile/reviews-user/reviews-user.component';
 import { ServicesUserComponent } from './profile/services-user/services-user.component';
+import { FeedbacksAdminComponent } from './feedbacks-admin/feedbacks-admin.component';
+import { PendingsComponent } from './dashboard/pendings/pendings.component';
+import { ShowPendingComponent } from './dashboard/pendings/show-pending/show-pending.component';
+import { ReviewsAdminComponent } from './reviews-admin/reviews-admin.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
   { path: 'add_service', component: AddServiceComponent, canActivate: [UserAuthGuardService]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [UserAuthGuardService]},
-  { path: 'feedback', component: FeedbackComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'profile', children: [
@@ -62,6 +64,8 @@ const appRoutes: Routes = [
   { path: 'review' ,children: [
     {path: ':uid', component: ReviewFormComponent}
   ]},
+  { path: 'feedback-admin', component: FeedbacksAdminComponent},
+  { path: 'reviews-admin', component: ReviewsAdminComponent}
 ];
 
 @NgModule({
@@ -75,7 +79,6 @@ const appRoutes: Routes = [
     DashboardComponent,
     ServicesComponent,
     ShowServiceComponent,
-    FeedbackComponent,
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
@@ -92,7 +95,11 @@ const appRoutes: Routes = [
     PaymentServiceComponent,
     ReviewFormComponent,
     ReviewsUserComponent,
-    ServicesUserComponent
+    ServicesUserComponent,
+    FeedbacksAdminComponent,
+    PendingsComponent,
+    ShowPendingComponent,
+    ReviewsAdminComponent
   ],
   imports: [
     MaterializeModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {} from 'angular-star-rating';
 import * as firebase from 'firebase';
+import {UserService} from "./shared/services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,9 @@ import * as firebase from 'firebase';
 })
 export class AppComponent implements OnInit{
 
+  constructor(private userService: UserService){
+
+  }
   ngOnInit() {
     const config = {
       apiKey: 'AIzaSyDJ4HdgirCzrCx67C-D6wIBQD9vtz4ES_0',

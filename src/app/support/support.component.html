@@ -1,33 +1,46 @@
 <h1>Feedback</h1>
-<form>
-  <div class="card-content">
-    <div class="row">
-      <div class="input-field col s12">
-        <p>
-          <label for='csFormTitle'>Titlu</label>
-          <input type='text' id='csFormTitle'>
-        </p>
+<h5>Spune-ne cu ce putem să îți îmbunătățim experiența pe CIAB</h5>
+<div class="valign-wrapper row">
+  <div class="col card hoverable s12">
+    <form [formGroup] = 'form' (submit)="onSubmit()" #f="ngForm">
+      <div class="card-content">
+        <div class="row">
+
+          <!--Titlu-->
+          <div class="input-field col s12">
+            <label for='nsFormTitle'>Titlu</label>
+            <input type='text' id='nsFormTitle' name='title' formControlName="title" class="validate" required>
+            <span class="helper-text" style="color: red"
+                  *ngIf="form.get('title').invalid && (f.submitted || form.get('title').touched)">
+                  Titlul este necesar!
+            </span>
+          </div>
+
+          <!--Nemultumiri-->
+          <div class="input-field col s12">
+            <label for='nsFormTitle'>Nemultumiri</label>
+            <input type='text'
+                   id='nsFormNemultumiri'
+                   name='Nemultumiri'
+                   formControlName="nemultumiri"
+                   class="validate">
+          </div>
+
+          <!--Sugestii-->
+          <div class="input-field col s12">
+            <label for='nsFormSuggestions'>Sugestii</label>
+            <input type="text"
+                   id='nsFormSuggestions'
+                   name='Sugestii'
+                   formControlName="sugestii"
+                   class="validate">
+          </div>
+        </div>
       </div>
 
-      <div class="col s12">
-        <p>
-          <label for='csFormDissat'>Nemulțumiri</label>
-          <textarea id='csFormDissat'></textarea>
-        </p>
+      <div class="card-action center-align">
+        <button class="waves-effect waves-light btn-large black" type="submit">Trimite review-ul</button>
       </div>
-
-      <div class="col s12">
-        <p>
-          <label for='csFormSugg'>Sugestii</label>
-          <textarea id='csFormSugg'></textarea>
-        </p>
-      </div>
-
-      <div class="col s12">
-        <p>
-          <input type="submit" class="btn  waves-effect waves-light" value="Trimite">
-        </p>
-      </div>
-    </div>
+    </form>
   </div>
-</form>
+</div>

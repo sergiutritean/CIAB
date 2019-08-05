@@ -22,6 +22,7 @@ export class PaymentServiceComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
   }
+  // Fa sa ruleze doAfterPayment()
 
   ngAfterViewInit() {
 

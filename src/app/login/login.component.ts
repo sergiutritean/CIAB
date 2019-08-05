@@ -4,6 +4,7 @@ import { toast } from 'angular2-materialize';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import {text} from "@angular/core/src/render3/instructions";
 
 @Component({
   selector: 'app-login',
@@ -35,6 +36,38 @@ export class LoginComponent implements OnInit {
         this.userService.uid = response.user.uid;
         this.router.navigate(['dashboard']);
         toast('Loggin succesfull!', 1000);
+
+        this.userService.getNotify(this.userService.uid).once('value',snap => {
+          let notifyes = snap.val();
+          let offer_true = 0;
+          let offer_false = 0;
+          let request_true = 0;
+          let request_false = 0;
+          if(notifyes){
+            for(let key in notifyes) if(!notifyes[key].isShown) {
+              notifyes[key].isShown = true;
+              if (notifyes[key].type == 'offer') {
+                if (notifyes[key].isValidation) {
+                  offer_true++;
+                } else {
+                  offer_false++;
+                }
+              } else if (notifyes[key].isValidation) {
+                request_true++;
+              } else {
+                request_false++;
+              }
+            }
+            let textToShow = '';
+            if(offer_true) textToShow += offer_true + ' oferte ti-au fost aprobate! </br>';
+            if(offer_false) textToShow += 'Ai ' + offer_false + ' cereri pentru serviciile tale </br>';
+            if(request_true) textToShow += offer_false + ' cereri ti-au fost aprobate </br>';
+            if(request_false) textToShow += 'Ai ' + request_false + ' oferte pentru cererile tale';
+            toast(textToShow,5000);
+          }
+          this.userService.getNotify(this.userService.uid).set(notifyes);
+          //continue
+        })
       });
     }).catch(error => this.error = error);
   }

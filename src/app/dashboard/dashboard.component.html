@@ -1,22 +1,76 @@
-<h3>Dashboard</h3>
 <div class="row">
-  <div class="col s3 flow-text"
-       (click)="changeStatus('services')"
+  <div class="col s6 flow-text center-align"
        style="cursor: pointer"
-       >Serviciile mele</div>
-
-  <div class="col s3 flow-text"
-       (click)="changeStatus('services_progress')"
-       style="cursor: pointer">Servicii progress</div>
-
-  <div class="col s3 flow-text"
-       (click)="changeStatus('services_done')"
-       style="cursor: pointer">Servicii terminate</div>
-
-  <div class="col s3 flow-text"
-       (click)="changeStatus('services_waiting')"
-       style="cursor: pointer">Servicii în așteptare</div>
+       [ngStyle]="{'font-weight':(isActive['cereri']?'bold':'')}"
+       (click)="changeStatus('cereri')">
+    Cereri
+  </div>
+  <div class="col s6 flow-text center-align"
+       style="cursor: pointer"
+       [ngStyle]="{'font-weight':(isActive['oferte']?'bold':'')}"
+       (click)="changeStatus('oferte')">
+    Oferte
+  </div>
 </div>
 
-<app-services [services] = "servicesToPass" class="flow-text" [status]="status"></app-services>
-<!-- TODO: bold active texts-->
+<div class="row center-align" *ngIf="isActive['cereri']">
+  <div class="col s3 flow-text"
+       (click)="switchRequests('request_services')"
+       [ngStyle]="{'font-weight':(isActive['request_services']?'bold':'')}"
+       style="cursor: pointer">Cererile mele</div>
+
+  <div class="col s3 flow-text"
+       (click)="switchRequests('request_pendings')"
+       [ngStyle]="{'font-weight':(isActive['request_pendings']?'bold':'')}"
+       style="cursor: pointer">Cereri in asteptare</div>
+
+  <div class="col s3 flow-text"
+       (click)="switchRequests('request_waiting')"
+       [ngStyle]="{'font-weight':(isActive['request_waiting']?'bold':'')}"
+       style="cursor: pointer">Cereri in lucru</div>
+
+  <div class="col s3 flow-text"
+       (click)="switchRequests('request_done')"
+       [ngStyle]="{'font-weight':(isActive['request_done']?'bold':'')}"
+       style="cursor: pointer">Cereri terminate</div>
+</div>
+
+<div class="row" *ngIf="isActive['oferte']">
+  <div class="col s3 flow-text"
+       (click)="switchOffers('offer_services')"
+       style="cursor: pointer"
+       [ngStyle]="{'font-weight':(isActive['offer_services']?'bold':'')}">Serviciile mele
+  </div>
+
+  <div class="col s3 flow-text"
+       (click)="switchOffers('offer_pendings')"
+       [ngStyle]="{'font-weight':(isActive['offer_pendings']?'bold':'')}"
+       style="cursor: pointer">Oferte in asteptare
+  </div>
+
+  <div class="col s3 flow-text"
+       (click)="switchOffers('offer_progress')"
+       [ngStyle]="{'font-weight':(isActive['offer_progress']?'bold':'')}"
+       style="cursor: pointer">Oferte in progress
+  </div>
+
+  <div class="col s3 flow-text"
+       (click)="switchOffers('offer_done')"
+       [ngStyle]="{'font-weight':(isActive['offer_done']?'bold':'')}"
+       style="cursor: pointer">Oferte terminate
+  </div>
+</div>
+
+
+<app-services [status]="status"
+              [services] = "servicesToPass"
+              *ngIf="!statusIsPending()"
+              class="flow-text">
+</app-services>
+
+<app-pendings [status]="status"
+              [pendings]="servicesToPass"
+              *ngIf="statusIsPending()"
+              class="flow-text">
+
+</app-pendings>

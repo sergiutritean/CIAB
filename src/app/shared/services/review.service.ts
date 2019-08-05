@@ -7,6 +7,9 @@ import {UserService} from "./user.service";
   providedIn: 'root'
 })
 export class ReviewService {
+
+  afterPurchase: boolean;
+
   constructor(private serviceService: ServiceService,
               private userService: UserService) {}
 

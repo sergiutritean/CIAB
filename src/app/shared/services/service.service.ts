@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { ServiceModel } from 'src/app/shared/service.model';
 import { UserService } from 'src/app/shared/services/user.service';
+import {PendingModel} from "../pending.model";
+import {TransServiceModel} from "../transService.model";
 
 @Injectable({
   providedIn: 'root'
@@ -22,31 +24,23 @@ export class ServiceService {
     });
     if(!services) services = [];
     services.push(service);
+    console.log(services,url);
     return firebase.database().ref(url).update(services);
   }
 
-  whenBuyService( service: ServiceModel ) {
-    //Add to buyer
-    const url2: any[] = ['services/' + this.userService.uid + '/' + service.uid,
-                        'services/' + service.fromUser + '/' + service.uid];
-    const status: any[] = ['waiting', 'processing'];
-    service.toUser = this.userService.uid;
-    if( !service.isOffer ){
-      let aux = service.toUser;
-      service.toUser = service.fromUser;
-      service.fromUser = aux;
-    }
-    url2.forEach( (url, i) => {
-      let services = [];
-      let copy = service;
-      copy.status = status[i];
-      firebase.database().ref(url).once( 'value', snap => {
-        services = snap.val();
-      });
-      if(!services) services = [];
-      services.push(service);
-      firebase.database().ref(url).set(services);
-    });
+  whenBuyService( pending: PendingModel ) {
+    let transService = new TransServiceModel(
+      pending.type,
+      pending.uidService,
+      'in_progress',
+      pending.fromUser,
+      pending.toUser,
+      pending.pictureFromUser,
+      pending.pictureToUser,
+      pending.price,
+      new Date()
+    );
+    this.userService.getTransService().push(transService);
   }
 
   addImage(url, image) {
@@ -58,6 +52,31 @@ export class ServiceService {
     return firebase.database().ref('services');
   }
 
+  getService(userUID,serviceUID){
+    return firebase.database().ref('services/'+userUID+'/'+serviceUID);
+  }
+
+  modifyService(userUID,serviceUID,data){
+    firebase.database().ref('services/'+userUID+'/'+serviceUID).set(data);
+  }
+
+  getDatabase() {
+    return firebase.database().ref();
+  }
+
+  async convertUIDtoName(uidService: string, uidUser: string){
+    console.log(uidService,uidUser);
+    let name = '';
+    this.getServices().once('value', snap => {
+      let services = snap.val();
+      for(let key in services) if(services[key][uidService]){
+        name = services[key][uidService][0].title;
+        return;
+      }
+    });
+    console.log(name);
+    return name;
+  }
 
   get_all_service_keys(userUID: string):any {
     let goodServices = [];

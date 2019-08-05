@@ -24,6 +24,7 @@ export class FilterComponent implements OnInit {
     title: new FormControl(''),
     loc: new FormControl(''),
     barter: new FormControl(''),
+    only_barter: new FormControl(''),
     price: new FormGroup({
       min: new FormControl(''),
       max: new FormControl('')
@@ -37,6 +38,7 @@ export class FilterComponent implements OnInit {
   ngOnInit() {
     this.form.patchValue({
       'barter': false,
+      'only_barter': false,
       'all': false,
       'service_type':{
         'offer': true,

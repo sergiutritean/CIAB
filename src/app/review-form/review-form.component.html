@@ -1,27 +1,35 @@
 <div class="valign-wrapper row">
   <div class="col card hoverable s12">
-    <form [formGroup] = 'form' (submit)="onSubmit()">
+    <form [formGroup] = 'form' (submit)="onSubmit()" #f="ngForm">
       <div class="card-content">
         <div class="row">
 
           <div class="input-field col s12">
             <label for='nsFormTitle'>Titlu</label>
             <input type='text' id='nsFormTitle' name='title' formControlName="title" class="validate" required>
-            <span class="helper-text" data-error="Titlul este necesar!">Helper text</span>
+            <span class="helper-text" style="color: red"
+                  *ngIf="form.get('title').invalid && (f.submitted || form.get('title').touched)">
+                  Titlul este necesar!
+            </span>
           </div>
 
           <div class="input-field col s12">
             <label for='nsFormDescription'>Descriere</label>
             <textarea class="materialize-textarea validate" id='nsFormDescription' name='description' formControlName="desc" required></textarea>
-            <span class="helper-text" data-error="Descrierea este necesara!" data-success="right">Helper text</span>
+            <span class="helper-text" style="color: red"
+                  *ngIf="form.get('desc').invalid && (f.submitted || form.get('desc').touched)">
+                  Descrierea este necesara!
+            </span>
           </div>
-
+          <br>
           <div class="col s3"></div>
           <div class="col s3">
             <p class="flow-text">Nota: {{ form.value.rating }}</p>
           </div>
           <div class="col s3">
             <star-rating-control formControlName="rating" [showHalfStars]="true" [step]="0.5" [hoverEnabled]="true" size="large"></star-rating-control>
+            <span class="helper-text" data-error="Nota este necesara!"
+                  *ngIf="form.get('rating').invalid && (f.submitted || form.get('rating').touched)"></span>
           </div>
           <div class="col s3"></div>
 
@@ -41,7 +49,7 @@
           <button class="waves-effect waves-light btn-large" type="submit" [disabled]="notAuth()">Trimite review-ul</button>
         </div>
         <p style="color: red">{{error}}</p>
-        <p style="color: red" *ngIf="notAuth()">You have to be logged in to send a review!</p>
+        <p style="color: red" *ngIf="notAuth()">Trebuie sa fii logat ca sa trimiti un review!</p>
       </div>
     </form>
   </div>

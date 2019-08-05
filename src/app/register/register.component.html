@@ -6,17 +6,27 @@
         <div class="row">
 
           <!--Profile image-->
-          <div class="image-upload col s12 poza center-align">
-            <label for="file-input2" class="center-align">
-              <i class="large material-icons" *ngIf="isNull()" >add</i>
-              <img src="{{ imageURL }}" alt="" *ngIf="!isNull()" width="100%" height="100%">
-            </label>
-            <input id="file-input2" type="file" (change)="onFileChanged($event)"/>
+          <div>
+            <p style="color: #9e9e9e">Incarca o poza cu tine<span style="color: red">*</span></p>
+            <div class="image-upload col s12 poza center-align" id="pozaProfil">
+              <label for="file-input2" class="center-align">
+                <i class="large material-icons" *ngIf="isNull()" >add</i>
+                <img src="{{ imageURL }}" alt="" *ngIf="!isNull()" width="100%" height="100%">
+              </label>
+              <input id="file-input2" type="file" (change)="onFileChanged($event)"/>
+            </div>
+            <br>
+            <span class="" style="color: red"
+                  *ngIf = "isNull() && f.submitted">
+                  Te rugam sa introduci o poză cu tine!
+            </span>
+            <br>
           </div>
+
 
           <!--Account type-->
           <div class="col s12">
-            <p style="color: #9e9e9e">Account type</p>
+            <p style="color: #9e9e9e">Alege tipul contului<span style="color: red">*</span></p>
             <p>
               <input name="account_type" type="radio" id="regular-standard" [value]="'regular_standard'" formControlName="account_type"/>
               <label for="regular-standard">Regular Standard</label>
@@ -29,44 +39,77 @@
               <input name="account_type" type="radio" id="business" [value]="'business'" formControlName="account_type"/>
               <label for="business">Business</label>
             </p>
+            <br>
+            <span class="" style="color: red"
+                  *ngIf = " form.get('account_type').invalid && f.submitted">
+                  Te rugam sa selectezi un tip de cont!
+            </span>
+            <br>
           </div>
 
           <!--Full name-->
           <div class="input-field col s12">
-            <label>Full name</label>
-            <input type="text" class="validate" formControlName="name"/>
+            <label>Numele complet<span style="color: red">*</span></label>
+            <input type="text" class="validate" formControlName="name" required/>
+            <br>
+            <span class="" style="color: red"
+                  *ngIf = " form.get('name').invalid && (f.submitted || form.get('name').touched)">
+                  Te rugam sa introduci un nume!
+            </span>
+            <br>
           </div>
 
           <!--Username-->
           <div class="input-field col s12">
-            <label>Username</label>
-            <input type="text" class="validate" formControlName="username"/>
+            <label>Username<span style="color: red">*</span></label>
+            <input type="text" class="validate" formControlName="username" required/>
+            <br>
+            <span class="" style="color: red"
+                  *ngIf = " form.get('username').invalid && (f.submitted || form.get('username').touched)">
+                  Te rugam sa introduci un username!
+            </span>
+            <br>
           </div>
 
           <!--Email address-->
           <div class="input-field col s12">
-            <label for="email">Email address</label>
+            <label for="email">Email<span style="color: red">*</span></label>
             <input type="email" class="validate" name="email" id="email" ngModel required formControlName="email"/>
-            <span class="helper-text error" *ngIf = "!form.get('email').valid && (form.get('email').touched || f.submitted)"> Please enter an email! </span>
+            <br>
+            <span class="helper-text error" style="color: red"
+                  *ngIf = "!form.get('email').valid && (form.get('email').touched || f.submitted)">
+                  Te rugam sa introduci un mail!
+            </span>
+            <br>
           </div>
 
           <!--Password-->
           <div class="input-field col s12">
-            <label>Password</label>
-            <input type="password" class="validate" formControlName="password1"/>
-            <span class="helper-text error" *ngIf = "!form.get('password1').valid && (form.get('password1').touched || f.submitted)"> Please enter a password! </span>
+            <label>Parola<span style="color: red">*</span></label>
+            <input type="password" class="validate" formControlName="password1" required/>
+            <br>
+            <span class="helper-text error" style="color: red"
+                  *ngIf = "!form.get('password1').valid && (form.get('password1').touched || f.submitted)">
+                  Te rugam sa introduci o parola!
+            </span>
+            <br>
           </div>
 
           <!--Password2-->
           <div class="input-field col s12">
-            <label>Re-enter password</label>
-            <input type="password" class="validate" formControlName="password2"/>
-            <span class="helper-text error" *ngIf = "(form.get('password2').touched || false) && (form.get('password1').value !== form.get('password2').value)"> Passwords don't match! </span>
+            <label>Reintrodu parola<span style="color: red">*</span></label>
+            <input type="password" class="validate" formControlName="password2" required/>
+            <br>
+            <span class="helper-text error" style="color: red"
+                  *ngIf = "(form.get('password2').touched) && (form.get('password1').value !== form.get('password2').value)">
+                  Parolele nu sunt la fel!
+            </span>
+            <br>
           </div>
 
           <!--Location-->
           <div class="input-field col s12">
-            <label>Location</label>
+            <label>Locatie</label>
             <input type="text" class="validate" formControlName="location"/>
           </div>
 
@@ -74,7 +117,7 @@
           <div class="input-field col s12">
             <select multiple formControlName="categories" materialize="material_select"
                     [materializeSelectOptions]="categories" #select>
-              <option value="" disabled selected>Choose your option</option>
+              <option value="" disabled selected>Alege aici</option>
               <option [value]="category" *ngFor="let category of categories;index as i">{{ category }}</option>
             </select>
             <label>Domenii in care prestezi servicii</label>
@@ -82,30 +125,44 @@
 
           <!--Description-->
           <div class="input-field col s12">
-            <label>Describe yourself</label>
-            <input type="text" class="validate" formControlName="desc"/>
+            <label>Descrie-te<span style="color: red">*</span></label>
+            <input type="text" class="validate" formControlName="desc" required/>
+            <br>
+            <span class="" style="color: red"
+                  *ngIf = " form.get('desc').invalid && (f.submitted || form.get('desc').touched)">
+                  Te rugam sa introduci o descriere!
+            </span>
+            <br>
           </div>
 
           <!--Phone number-->
           <div class="input-field col s12">
             <i class="material-icons prefix">phone</i>
-            <input id="icon_telephone" type="tel" class="validate" formControlName="phone">
-            <label for="icon_telephone">Nr. de telefon</label>
+            <input id="icon_telephone" type="tel" class="validate" formControlName="phone" required>
+            <label for="icon_telephone">Nr. de telefon<span style="color: red">*</span></label>
           </div>
 
           <!--Barter-->
           <div class="col s12">
             <p>
               <input type="checkbox" class="filled-in" id="barter" checked="checked" formControlName="barter"/>
-              <label for="barter">Barter</label>
+              <label for="barter">Accepti Barter?</label>
             </p>
           </div>
 
-        <span class="helper-text error" *ngIf = "error != null "> {{ error }} </span>
+          <!--Partner-->
+          <div class="input-field col s12">
+              <label>Esti partner Caught In A Box? Introdu aici codul</label>
+              <input type="text" class="validate" id="partner" formControlName="partner"/>
+              <span class="helper-text error" style="color: red" *ngIf = "wrongPartnerKey()"> Cheia introdusa nu apartine niciunui partener! </span>
+          </div>
+
+          <span class="helper-text error" style="color: red" *ngIf = "error != null "> {{ error }} </span>
+          <span style="color: red;margin-left:2rem">*</span> - celule obligatorii
       </div>
 
       <div class="card-action center-align">
-        <input type="submit" class="btn green waves-effect waves-light" value="Register">
+        <input type="submit" class="btn black waves-effect waves-/light" value="Register">
       </div>
 
       </div>

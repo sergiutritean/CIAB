@@ -28,7 +28,9 @@ export class ReviewsUserComponent implements OnInit {
         this.reviews = snap.val().filter( review =>{
           console.log(review.idService);
           if(serviceUID.includes(review.idService)) {
-            review.fromUser = this.userService.convertUIDtoName(review.fromUser);
+            this.userService.convertUIDtoName(review.fromUser).then(val => {
+              review.fromUser = val;
+            });
             return true;
           }
           return false;

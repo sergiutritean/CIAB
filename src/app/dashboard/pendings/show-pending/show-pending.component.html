@@ -1,0 +1,113 @@
+<div class="row valign-wrapper" style="background-color: #F0F0F0;padding:1rem 0">
+  <div class="col s2">
+    <img [src]="pending.fromUser === this.uidUser?pending.pictureFromUser:pending.pictureToUser"
+         style="width: 100%; height: 100%;"/>
+  </div>
+  <div class="col s4">
+    <strong>User: </strong>{{name}}
+    <br>
+    <strong>For service: </strong>{{title}}
+  </div>
+  <div class="col s3">
+    {{pending.timestamp | date:'medium'}}
+  </div>
+
+  <!--offer_pendings-->
+  <div class="col s3" *ngIf="status == 'offer_pendings'">
+    <div *ngIf="pending.toUser === uidUser">
+      <button class="btn-large green" style="width: 100%;height: 50% !important;line-height:2!important">
+        <span class="align-center" *ngIf="isNumber(pending.price)"> {{pending.price}} eur</span>
+        <span class="align-center" *ngIf="!isNumber(pending.price)" [routerLink]="'/service/'+pending.price"> {{barterServiceName}}</span>
+      </button>
+
+      <button class="btn-large black"
+              style="width: 100%;height: 100% !important; line-height:2!important"
+              (click)="openConfirm()">Raspunde</button>
+    </div>
+
+    <div *ngIf="pending.fromUser === uidUser">
+      <span style="font-size: 1rem; color: black">Wait for confirm</span>
+    </div>
+  </div>
+
+  <!--offer_progress-->
+  <div class="col s3" *ngIf="status=='offer_progress'">
+    <p>The client is waiting!</p>
+  </div>
+
+  <!--offer_done-->
+
+  <!--request_pendings-->
+  <div class="col s3" *ngIf="status == 'request_pendings'">
+    <div *ngIf="pending.toUser === uidUser">
+      <button class="btn-large green" style="width: 100%;height: 50% !important;line-height:2!important">
+        <span class="align-center" *ngIf="isNumber(pending.price)"> {{pending.price}} eur</span>
+        <span class="align-center" *ngIf="!isNumber(pending.price)" [routerLink]="'/service/'+pending.price"> {{barterServiceName}}</span>
+      </button>
+
+      <button class="btn-large black"
+              style="width: 100%;height: 100% !important; line-height:2!important"
+              (click)="openConfirm()">Raspunde</button>
+    </div>
+
+    <div *ngIf="pending.fromUser === uidUser">
+      <span style="font-size: 1rem; color: black">Wait for confirm</span>
+    </div>
+  </div>
+
+  <!--request_waiting-->
+  <div class="col s3" *ngIf="status=='request_waiting'">
+    <button class="btn-large green" style="width: 100%;height:100% !important;line-height: 2!important;"
+            (click)="openModalDone()">
+      <span class="align-center">E serviciul prestat?</span>
+    </button>
+  </div>
+
+  <!--request_done-->
+
+</div>
+<div id="modaltest" class="modal valign-wrapper" materialize="modal" style="transform: translateY(-50%) !important; height: auto !important"
+     [materializeParams]="[{dismissible: true}]" [materializeSelectOptions]="[{startingTop:'25%'}]" [materializeActions]="modalActions">
+
+  <div *ngIf="modalStatus=='confirm'">
+
+    <div *ngIf="pending.type == 'request'">
+      <div class="modal-content">
+        <h4>Vreți să confirmați cumpărarea serviciului?</h4>
+        <h6>Puteți confirma prin plătirea serviciului</h6>
+      </div>
+      <div id="paypal-button"></div>
+    </div>
+
+    <div *ngIf="pending.type == 'offer'">
+      <div class="modal-content">
+        <h4>Vreți să confirmați prestarea serviciului?</h4>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <a href="" class="col m1"></a>
+          <a class="col s12 m4 waves-effect waves-black btn-large black center-align" (click)="onConfirm()">Da</a>
+          <a href="" class="col m2"></a>
+          <a class="col s12 m4 waves-effect waves-black btn-large black align-center modal-close " >Nu</a>
+          <a href="" class="col m1"></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="modalStatus=='done'">
+    <div class="modal-content">
+      <h4>Vreți să confirmați terminarea serviciului?</h4>
+    </div>
+    <div class="modal-footer">
+      <div class="row">
+        <a href="" class="col m1"></a>
+        <a class="col s12 m4 waves-effect waves-black btn-large black center-align" (click)="onConfirmDone()">Da</a>
+        <a href="" class="col m2"></a>
+        <a class="col s12 m4 waves-effect waves-black btn-large black align-center modal-close " >Nu</a>
+        <a href="" class="col m1"></a>
+      </div>
+    </div>
+  </div>
+</div>

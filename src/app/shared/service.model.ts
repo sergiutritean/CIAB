@@ -9,7 +9,7 @@ export class ServiceModel {
   public fromUser: string;
   public toUser: string;
   public uid: string;
-  public isOffer: boolean;
+  public isOffer: string;
   public status: string;
   public price: number;
 
@@ -22,7 +22,7 @@ export class ServiceModel {
               fromUser: string,
               toUser: string,
               uid: string,
-              isOffer: boolean,
+              isOffer: string,
               status: string,
               price: number) {
 

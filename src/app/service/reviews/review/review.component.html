@@ -1,25 +1,45 @@
-<li class="review collection-item" style="list-style: none">
-	<p class="reviewTitle"><b>User: </b>{{ review.fromUser }}</p>
-	<div class="rating medium star-icon value-{{ review.rating-1  | number: 0 }} half label-left">
-    <div class="rating half label-left">
-      <b>Rating: </b>{{review.rating}}
-      <star-rating
-        [starType]="'svg'"
-        [rating]="review.rating"
-        [readOnly]="true">
-      </star-rating>
+<div class="container">
+  <li class="review collection-item row" style="list-style: none">
+
+    <div class="col s4">
+      <img [src]="review.imageFromUser" style="height: auto; width: 33%">
     </div>
-  </div>
-	<div class="reviewContent">
-		{{ review.content}}
-	</div>
-	<div class="reviewPhotos">
-		<div *ngFor="let photo of review.imagePath">
-			<img
-					class="materialboxed"
-					height="100px"
-					width="auto"
-					src='{{ photo }}'>
-		</div>
-	</div>
-</li>
+
+    <div class="col s4">
+
+      <p class="reviewTitle"><b>User: </b>{{ review.fromUser }}
+        <span *ngIf="review.partner">
+        <img [src]="review.partnerImage" style="height: 1em">{{' ' + review.partner.name}}
+      </span>
+      </p>
+
+      <div class="rating half label-left"><b>Rating: </b>{{review.rating + ' '}}
+        <star-rating
+          [starType]="'svg'"
+          [rating]="review.rating"
+          [readOnly]="true"></star-rating>
+        <!--[hoverEnabled]="true"-->
+      </div>
+
+      <p><strong>Title:</strong>{{' ' + review.title}}</p>
+
+      <div class="reviewContent">
+        {{ review.content}}
+      </div>
+
+    </div>
+    <div class="col s4">
+      <div class="reviewPhotos">
+        <div *ngFor="let photo of review.imagePath">
+          <img class="materialboxed"
+               height="100px"
+               width="auto"
+               [src]="photo">
+        </div>
+      </div>
+    </div>
+
+
+  </li>
+
+</div>

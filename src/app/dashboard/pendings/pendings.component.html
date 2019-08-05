@@ -1,0 +1,17 @@
+<div *ngIf="pendings.length == 0">
+  <div [ngSwitch]="status">
+    <p *ngSwitchCase="'offer_services'">Nu ai servicii adaugate</p>
+    <p *ngSwitchCase="'offer_pendings'">Nu ai cereri in asteptare</p>
+    <p *ngSwitchCase="'offer_progress'">Nu ai nicio oferta in progress</p>
+    <p *ngSwitchCase="'offer_done'">Nu ai nicio oferta terminata</p>
+    <p *ngSwitchCase="'request_pendings'">Nu ai nicio cerere in asteptare</p>
+    <p *ngSwitchCase="'request_waiting'">Nu ai nicio cerere in progress</p>
+    <p *ngSwitchCase="'request_done'">Nu ai nicio cerere terminata</p>
+  </div>
+</div>
+<div *ngFor="let pending of pendings">
+  <app-show-pending [pending]="pending"
+                    [status]="status">
+
+  </app-show-pending>
+</div>

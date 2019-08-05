@@ -1,6 +1,15 @@
-<h2>Parteneri</h2>
-<div id="partners">
-  <div class="partner grey darken-2"></div>
-  <div class="partner grey darken-2"></div>
-  <div class="partner grey darken-2"></div>
+<div class="container">
+  <h2 style="text-align:center">Parteneri</h2>
+  <div class="row center-align aux" *ngFor="let index of numbers">
+    <a [href]="partners[index].website" class="col s6 center-align">
+      <div class="partner aux grey darken-2">
+        <img [src]="partners[index].photoURL" style="height: 100%;width:100%"/>
+      </div>
+    </a>
+    <a *ngIf="index+1 < partners.length" [href]="partners[index+1].website" class="col s6 center-align" >
+      <div class="partner grey darken-2">
+        <img [src]="partners[index+1].photoURL" style="height: 100%;width:100%"/>
+      </div>
+    </a>
+  </div>
 </div>

@@ -17,6 +17,8 @@ export class ProfileComponent implements OnInit {
   reviews = [];
   services = [];
   uid: string;
+  partnerImage: any;
+  partnerImageURL: string;
 
   constructor(private serviceService: ServiceService,
               private userService: UserService,
@@ -38,15 +40,24 @@ export class ProfileComponent implements OnInit {
     // this.reviewService.getUserReviews(this.userService.uid).on('value', snap => {
     this.reviewService.getUserReviews(this.uid).on('value', snap => {
       this.reviews = snap.val();
-      this.userService.getUsers().on('value', snap => {
+      this.userService.getUsers().once('value', snap => {
         console.log(snap.val());
         // this.user = snap.val().filter( user => user.uid === this.userService.uid)[0];
         this.user = snap.val().filter( user => user.uid === this.uid)[0];
-        this.hasUser = true;
-        console.log(this.user);
-        // this.serviceService.getServices(this.userService.uid).on('value', snap => {
-        this.serviceService.getServices(this.uid).on('value', snap => {
-          this.services = snap.val();
+        this.userService.getPartners().once('value', snap => {
+          if(this.user.isPartner){
+            this.partnerImage = snap.val()[this.user.isPartner];
+            let photoURL = this.user.isPartner + '/logo.png';
+            this.userService.refToStorage(photoURL).getDownloadURL().then(val => {
+              this.partnerImageURL = val;
+            });
+          }
+          this.hasUser = true;
+          console.log(this.user);
+          // this.serviceService.getServices(this.userService.uid).on('value', snap => {
+          this.serviceService.getServices(this.uid).on('value', snap => {
+            this.services = snap.val();
+          });
         });
       })
     })

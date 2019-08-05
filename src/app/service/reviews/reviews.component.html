@@ -1,4 +1,5 @@
-<ul class="reviewsContainer collection" *ngFor="let review of reviews">
+<ul class="reviewsContainer collection" *ngFor="let review of reviews;let i=index">
   <app-review [review]="review">
+
   </app-review>
 </ul>
